@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Manages the objects kept between different scene.
+/// </summary>
 public class KeepOnLoad : MonoBehaviour
 {
     public GameObject[] objectsKept;
