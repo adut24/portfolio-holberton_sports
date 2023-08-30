@@ -3,7 +3,12 @@ guid: 6aca1e15f9e3d4943baefa6a738d34f1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bowling Pack Material
+    second: {fileID: 2100000, guid: 5adbe2b1fe3739541b87573e22254535, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

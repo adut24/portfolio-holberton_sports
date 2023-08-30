@@ -9,11 +9,14 @@ public class SportPreview : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     private const string DEFAULT_TEXT = "CHOOSE A SPORT";
 
-    public Sprite sportImage;
-    public Image previewImage;
-    public Text sportText;
-    public string sportName;
-
+    [SerializeField]
+    private Sprite sportImage;
+    [SerializeField]
+    private Image previewImage;
+    [SerializeField]
+    private Text sportText;
+    [SerializeField]
+    private string sportName;
     [SerializeField]
     private Sprite _defaultImage;
 
@@ -34,7 +37,7 @@ public class SportPreview : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     /// <param name="eventData">Information about the action</param>
     public void OnPointerExit(PointerEventData eventData)
     {
-        previewImage.sprite = _defaultImage;
         sportText.text = DEFAULT_TEXT;
+        previewImage.sprite = _defaultImage;
     }
 }

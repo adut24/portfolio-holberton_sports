@@ -17,7 +17,7 @@ public class InteractorManager : MonoBehaviour
     /// <summary>
     /// Activates the RayInteractor and deactivates the DirectInteractor.
     /// </summary>
-    public void ToggleMenuBehavior(bool menuBehavior)
+    public void ToggleMenuBehavior(bool menuBehavior = true)
     {
         _leftDirectController.SetActive(!menuBehavior);
         _rightDirectController.SetActive(!menuBehavior);
