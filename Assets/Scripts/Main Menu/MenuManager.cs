@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,6 +16,8 @@ public class MenuManager : MonoBehaviour
     private InputActionProperty _menuButtonLeftPress;
     [SerializeField]
     private InputActionProperty _menuButtonRightPress;
+    [SerializeField]
+    private Transform _player;
 
     private void Awake() => _interactorManager.ToggleMenuBehavior();
 
@@ -21,17 +26,29 @@ public class MenuManager : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Loads <paramref name="sceneName"/>.
-    /// </summary>
-    /// <param name="sceneName">Scene to load</param>
-    public void LoadScene(string sceneName)
+    private void PauseGame()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        player.transform.position = new Vector3(20, 0, 0);
-        SceneManager.LoadScene(sceneName);
+        Debug.Log("Pause Activated");
+        _interactorManager.ToggleMenuBehavior();
+    }
+
+
+    public void LoadGame(string game) => StartCoroutine(LoadScene(game));
+
+    private IEnumerator LoadScene(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!asyncLoad.isDone)
+            yield return null;
+
+        Transform spawnPoint = GameObject.FindWithTag("SpawnPoint").transform;
+
+        _player.position = spawnPoint.position;
+        _player.rotation = spawnPoint.rotation;
         _interactorManager.ToggleMenuBehavior(false);
     }
+
 
     /// <summary>
     /// Quits the game.

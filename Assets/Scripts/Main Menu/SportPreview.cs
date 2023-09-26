@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ public class SportPreview : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField]
     private Image previewImage;
     [SerializeField]
-    private Text sportText;
+    private TextMeshProUGUI sportText;
     [SerializeField]
     private string sportName;
     [SerializeField]
