@@ -15,10 +15,29 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 6968115600435141923}
+  - {fileID: -2252641973771518126}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-2252641973771518126
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0d8e7c0f4cc3f994eb5a052e017af6ec
+  m_EffectName: Lowpass
+  m_MixLevel: 0700faaf40e55d34d8827778edc33c25
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: c1418b029e0e7d647a8006a9e8a23996
+  - m_ParameterName: Resonance
+    m_GUID: 84b0997c938ed6244a894b49a079c7ed
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-1386015316709099603
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -34,10 +53,29 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 4484151985953692701}
+  - {fileID: -601109531010514461}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-601109531010514461
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: a1575993af6d1f9488853c97e31528b9
+  m_EffectName: Lowpass
+  m_MixLevel: 014de7748aaf9d748914379b95d951bf
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: 0cbf021be7e4cfb4fbbb9bbf17ffde65
+  - m_ParameterName: Resonance
+    m_GUID: a943c09852d897d42b2ec3395516b6ae
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -53,7 +91,11 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 2c78b09865e78a643966551f5c64efd8
+    name: bgmVol
+  - guid: 18f232ef9d28a764caad804076115737
+    name: sfxVol
   m_AudioMixerGroupViews:
   - guids:
     - 9cda222bbb300422f973280a7f871a5a
@@ -107,7 +149,10 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 41dc006e136ac45cf973ea47de1dabc0
   m_FloatValues:
+    c1418b029e0e7d647a8006a9e8a23996: 22000
     2c78b09865e78a643966551f5c64efd8: -20
+    0cbf021be7e4cfb4fbbb9bbf17ffde65: 22000
+    18f232ef9d28a764caad804076115737: -25
   m_TransitionOverrides: {}
 --- !u!244 &4484151985953692701
 AudioMixerEffectController:
