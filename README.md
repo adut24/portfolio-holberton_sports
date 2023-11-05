@@ -12,3 +12,5 @@
 - Preview placeholder: Image from [Freepik](https://fr.freepik.com/vecteurs-libre/personnes-jouant-au-tennis-table_9978498.htm")
 - "Table Tennis Table" (https://skfb.ly/6YRIC) by Diccbudd is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 - "Table Tennis Rackets (Ping Pong)" (https://skfb.ly/oD8nH) by AndrewHunt95 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+## OST
+- ＂Game Item Store!＂ Exciting Upbeat Game Music by HeatleyBros (https://youtu.be/q1hjI-taI2k?si=D-LnJh8lCmGVNGji)

@@ -5,11 +5,11 @@ using UnityEngine;
 /// </summary>
 public class KeepOnLoad : MonoBehaviour
 {
-    public GameObject[] objectsKept;
+	public GameObject[] objectsKept;
 
-    private void Start()
-    {
-        foreach (GameObject obj in objectsKept)
-            DontDestroyOnLoad(obj);
-    }
+	private void Start()
+	{
+		foreach (GameObject obj in objectsKept)
+			DontDestroyOnLoad(obj);
+	}
 }
