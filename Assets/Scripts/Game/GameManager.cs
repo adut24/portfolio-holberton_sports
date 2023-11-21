@@ -1,10 +1,8 @@
 using System.Collections;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Manages the different aspects of the game.
-/// </summary>
 public class GameManager : MonoBehaviour
 {
 	[SerializeField] private InteractorManager _interactorManager;
@@ -14,26 +12,15 @@ public class GameManager : MonoBehaviour
 
 	private void Awake() => _interactorManager.ToggleMenuBehavior();
 
-	/// <summary>
-	/// Sets which sport will be loaded.
-	/// </summary>
-	/// <param name="sportName">Name of the sport to load</param>
+
 	public void SetSport(string sportName) => _sport = sportName;
 
-	/// <summary>
-	/// Unsets the sport to load when the user goes back.
-	/// </summary>
 	public void UnsetSport() => _sport = null;
 
-	/// <summary>
-	/// Loads the scene of the sport.
-	/// </summary>
 	public void LoadSport()
 	{
 		if (_sport != null)
 			StartCoroutine(LoadScene(_sport));
-		else
-			return;
 	}
 
 	private IEnumerator LoadScene(string sceneName)
@@ -54,7 +41,7 @@ public class GameManager : MonoBehaviour
 		if (sceneName.Equals("MainMenu"))
 			_interactorManager.ToggleMenuBehavior();
 		else
-			_interactorManager.ToggleMenuBehavior(false);
+			_interactorManager.ToggleMenuBehavior(AccessibilityManager.ReducedMobilityMode);
 
 		Transform spawnPoint = GameObject.FindWithTag("SpawnPoint").transform;
 
@@ -65,16 +52,13 @@ public class GameManager : MonoBehaviour
 		yield return new WaitForSeconds(_fadeScreen.FadeDuration);
 	}
 
-	/// <summary>
-	/// Quits the game.
-	/// </summary>
 	public void QuitGame()
 	{
 		/* REMOVE THE UNITY EDITOR LINE IN FINAL VERSION */
-		#if UNITY_EDITOR
+#if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;
-		#else
+#else
 		Application.Quit();
-		#endif
+#endif
 	}
 }

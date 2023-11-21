@@ -3,9 +3,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-/// <summary>
-/// Manages the loading on the starting screen.
-/// </summary>
 public class StartScreen : MonoBehaviour
 {
 	[SerializeField] private InputActionReference _triggerLeftController;
@@ -32,7 +29,7 @@ public class StartScreen : MonoBehaviour
 		else
 			_rightTrigger.sprite = _rightTriggerNotPressed;
 
-		if (isLeftTriggerPressed && isRightTriggerPressed)
+		if (isLeftTriggerPressed || isRightTriggerPressed)
 			LoadMenu();
 	}
 
