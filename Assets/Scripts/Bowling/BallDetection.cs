@@ -8,7 +8,7 @@ public class BallDetection : MonoBehaviour
 		if (collision.gameObject.CompareTag("BowlingBall"))
 		{
 			collision.gameObject.GetComponent<XRGrabInteractable>().enabled = false;
-			collision.gameObject.GetComponent<Rigidbody>().velocity *= 1.3f;
+			collision.gameObject.GetComponent<Rigidbody>().velocity *= 1.4f;
 		}
 	}
 }

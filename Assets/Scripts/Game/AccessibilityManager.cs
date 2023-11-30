@@ -5,16 +5,22 @@ using UnityEngine.UI;
 
 public class AccessibilityManager : MonoBehaviour
 {
-	/* https://www.youtube.com/watch?v=-ewIt4v_hjw&list=PLobY7vO0pgVIOZNKTVRhkPzrfCjDJ0CNl&index=124 */
-	[SerializeField] private Toggle reducedMobilityToggle;
-	[SerializeField] private Toggle oneHandedToggle;
-    public static bool ReducedMobilityMode { get; set; }
-    public static bool OneHandedMode { get; set; }
+	public Toggle ReducedMobilityToggle {  get; set; }
+	public Toggle OneHandedToggle { get; set; }
+	public bool ReducedMobilityMode { get; set; }
+	public bool OneHandedMode { get; set; }
 
 	private string _filePath;
 
 	private void Start()
 	{
+		foreach (Toggle toggle in GameManager.Instance.GetComponent<PauseMenuManager>().PauseMenu.GetComponentsInChildren<Toggle>(true))
+		{
+			if (toggle.name == "ReducedMobilityToggle")
+				ReducedMobilityToggle = toggle;
+			else
+				OneHandedToggle = toggle;
+		}
 		_filePath = Path.Combine(Application.persistentDataPath, "accessilibity.json");
 		LoadSettings();
 	}
@@ -37,8 +43,8 @@ public class AccessibilityManager : MonoBehaviour
 			ReducedMobilityMode = accessibilitySettings.hasReducedMobility;
 			OneHandedMode = accessibilitySettings.isOneHanded;
 		}
-		reducedMobilityToggle.isOn = ReducedMobilityMode;
-		oneHandedToggle.isOn = OneHandedMode;
+		ReducedMobilityToggle.isOn = ReducedMobilityMode;
+		OneHandedToggle.isOn = OneHandedMode;
 	}
 }
 

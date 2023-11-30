@@ -14,7 +14,7 @@ public class DataManager : MonoBehaviour
 	public Dictionary<string, int> HighScores { get; set; }
 	private string _filePath;
 
-	public DataManager()
+	private void Start()
 	{
 		_filePath = Path.Combine(Application.persistentDataPath, "data.sav");
 	}
@@ -66,5 +66,18 @@ public static class EncryptionSystem
 		{
 			return null;
 		}
+	}
+
+	private static string GenerateRandomAesKey()
+	{
+		int[] keyLengths = { 128, 192, 256 };
+
+		int selectedKeyLength = keyLengths[new System.Random().Next(keyLengths.Length)];
+
+		byte[] key = new byte[selectedKeyLength / 8];
+		using RNGCryptoServiceProvider rng = new();
+		rng.GetBytes(key);
+
+		return key.ToString();
 	}
 }

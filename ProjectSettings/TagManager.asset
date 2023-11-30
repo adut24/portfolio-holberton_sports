@@ -6,6 +6,9 @@ TagManager:
   tags:
   - SpawnPoint
   - BowlingBall
+  - GameManager
+  - Pins1
+  - Pins2
   layers:
   - Default
   - TransparentFX
