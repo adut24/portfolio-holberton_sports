@@ -19,7 +19,7 @@ public class DataManager : MonoBehaviour
 		_filePath = Path.Combine(Application.persistentDataPath, "data.sav");
 	}
 
-	public string ToJson() => JsonUtility.ToJson(this);
+	private string ToJson() => JsonUtility.ToJson(this);
 }
 
 public static class EncryptionSystem

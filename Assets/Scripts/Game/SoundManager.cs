@@ -5,20 +5,21 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
+	public AudioMixer AudioMixer { get; set; }
+	public Slider BGMSlider { get; set; }
+	public Slider SFXSldier { get; set; }
+
 	[SerializeField] private AudioMixer _mixer;
-    public Slider BGMSlider { get; set; }
-    public Slider SFXSldier { get; set; }
+	[SerializeField] private Slider _bgmSlider;
+	[SerializeField] private Slider _sfxSlider;
+
     private string _filePath;
 
-	private void Start()
+	private void Awake()
 	{
-		foreach (Slider slider in GameManager.Instance.GetComponent<PauseMenuManager>().PauseMenu.GetComponentsInChildren<Slider>(true))
-		{
-			if (slider.name == "BGMSlider")
-				BGMSlider = slider;
-			else
-				SFXSldier = slider;
-		}
+		AudioMixer = _mixer;
+		BGMSlider = _bgmSlider;
+		SFXSldier = _sfxSlider;
 		_filePath = Path.Combine(Application.persistentDataPath, "sound.json");
 		LoadSoundSettings();
 	}

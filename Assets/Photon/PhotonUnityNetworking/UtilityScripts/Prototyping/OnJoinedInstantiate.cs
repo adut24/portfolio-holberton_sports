@@ -111,12 +111,13 @@ namespace Photon.Pun.UtilityScripts
 
         }
 
-        /// <summary>
-        /// Determines if the supplied GameObject is an instance of a prefab, or the actual source Asset, 
-        /// and returns a best guess at the actual resource the dev intended to use.
-        /// </summary>
-        /// <returns></returns>
-        protected static GameObject ValidatePrefab(GameObject unvalidated)
+		/// <summary>
+		/// Determines if the supplied GameObject is an instance of a prefab, or the actual source Asset, 
+		/// and returns a best guess at the actual resource the dev intended to use.
+		/// </summary>
+		/// <returns></returns>
+		[System.Obsolete]
+		protected static GameObject ValidatePrefab(GameObject unvalidated)
         {
             if (unvalidated == null)
                 return null;

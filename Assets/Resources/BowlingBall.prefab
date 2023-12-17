@@ -97,7 +97,7 @@ Rigidbody:
   m_GameObject: {fileID: 7217269412509568475}
   serializedVersion: 4
   m_Mass: 20
-  m_Drag: 0
+  m_Drag: 0.01
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -275,7 +275,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7217269412509568475}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9d7c6d09d8b9c2943948d91ad6a312b6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

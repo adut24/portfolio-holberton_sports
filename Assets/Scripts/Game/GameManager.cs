@@ -7,17 +7,39 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField] private InteractorManager _interactorManager;
-	[SerializeField] private FadeScreenManager _fadeScreen;
-	private string _sport;
 	public int NumberPlayers { get; set; }
+	public SoundManager SoundManager { get; set; }
+	public AccessibilityManager AccessibilityManager { get; set; }
+	public PauseMenuManager PauseMenuManager { get; set; }
+	public NetworkManager NetworkManager { get; set; }
+	public DataManager DataManager { get; set; }
+	public TutorialManager TutorialManager { get; set; }
 	public static GameManager Instance { get; set; }
+	public GameObject Player { get; set; }
 
-	private void Awake()
+	[SerializeField] private FadeScreenManager _fadeScreenManager;
+	[SerializeField] private SoundManager _soundManager;
+	[SerializeField] private AccessibilityManager _accessibilityManager;
+	[SerializeField] private PauseMenuManager _pauseMenuManager;
+	[SerializeField] private NetworkManager _networkManager;
+	[SerializeField] private DataManager _dataManager;
+	[SerializeField] private TutorialManager _tutorialManager;
+
+	private string _sport;
+
+	private void Start()
 	{
+		PhotonNetwork.AutomaticallySyncScene = true;
 		Instance = this;
-		_interactorManager.ToggleMenuBehavior();
+		SoundManager = _soundManager;
+		AccessibilityManager = _accessibilityManager;
+		PauseMenuManager = _pauseMenuManager;
+		NetworkManager = _networkManager;
+		DataManager = _dataManager;
+		TutorialManager = _tutorialManager;
+		NetworkManager.PauseMenu = PauseMenuManager.PauseMenu;
 		DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad(PauseMenuManager.PauseMenu);
 	}
 
 	public void SetSport(string sportName) => _sport = sportName;
@@ -38,8 +60,8 @@ public class GameManager : MonoBehaviour
 		if (!PhotonNetwork.OfflineMode)
 			PhotonNetwork.ConnectUsingSettings();
 
-		_fadeScreen.FadeOut();
-		yield return new WaitForSeconds(_fadeScreen.FadeDuration);
+		_fadeScreenManager.FadeOut();
+		yield return new WaitForSeconds(_fadeScreenManager.FadeDuration);
 
 		if (PhotonNetwork.IsMasterClient)
 			PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = NumberPlayers });

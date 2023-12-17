@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// <summary>
-/// Manages the animation on the hand depending on the triggers pressed.
-/// </summary>
 public class AnimateHandOnInput : MonoBehaviour
 {
 	[SerializeField] private InputActionProperty _pinchAnimation;

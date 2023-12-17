@@ -9,6 +9,8 @@ TagManager:
   - GameManager
   - Pins1
   - Pins2
+  - Tutorial
+  - Replay
   layers:
   - Default
   - TransparentFX

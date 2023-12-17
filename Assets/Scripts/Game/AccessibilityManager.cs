@@ -5,22 +5,20 @@ using UnityEngine.UI;
 
 public class AccessibilityManager : MonoBehaviour
 {
-	public Toggle ReducedMobilityToggle {  get; set; }
+	public Toggle ReducedMobilityToggle { get; set; }
 	public Toggle OneHandedToggle { get; set; }
 	public bool ReducedMobilityMode { get; set; }
 	public bool OneHandedMode { get; set; }
 
+	[SerializeField] private Toggle _reducedMobility;
+	[SerializeField] private Toggle _oneHanded;
+
 	private string _filePath;
 
-	private void Start()
+	private void Awake()
 	{
-		foreach (Toggle toggle in GameManager.Instance.GetComponent<PauseMenuManager>().PauseMenu.GetComponentsInChildren<Toggle>(true))
-		{
-			if (toggle.name == "ReducedMobilityToggle")
-				ReducedMobilityToggle = toggle;
-			else
-				OneHandedToggle = toggle;
-		}
+		ReducedMobilityToggle = _reducedMobility;
+		OneHandedToggle = _oneHanded;
 		_filePath = Path.Combine(Application.persistentDataPath, "accessilibity.json");
 		LoadSettings();
 	}
