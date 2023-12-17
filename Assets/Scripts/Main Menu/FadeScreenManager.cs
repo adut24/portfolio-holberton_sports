@@ -5,6 +5,7 @@ public class FadeScreenManager : MonoBehaviour
 {
 	[SerializeField] private float _fadeDuration = 2.0f;
 	[SerializeField] private Color _fadeColor;
+
 	private Renderer _rend;
 
 	public float FadeDuration { get => _fadeDuration; }

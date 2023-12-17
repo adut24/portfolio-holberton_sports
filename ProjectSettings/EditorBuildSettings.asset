@@ -12,12 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d1d2a9c593798c14a9cd51af7e74229c
   - enabled: 1
-    path: Assets/Scenes/Archery.unity
-    guid: 4fc6ea51a6252c64f82fd42002082ee6
-  - enabled: 1
-    path: Assets/Scenes/TableTennis.unity
-    guid: 9e223b7c3df811f4ca24d85a891c452a
-  - enabled: 1
     path: Assets/Scenes/Bowling.unity
     guid: 821cd25e9d934ef40b5b19c3c405cdd2
   m_configObjects:

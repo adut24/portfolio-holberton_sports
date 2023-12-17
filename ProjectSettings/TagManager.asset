@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - SpawnPoint
+  - BowlingBall
+  - GameManager
+  - Pins1
+  - Pins2
+  - Tutorial
+  - Replay
   layers:
   - Default
   - TransparentFX

@@ -1,80 +1,79 @@
-using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
-/// <summary>
-/// Manages the different aspects of the game.
-/// </summary>
+using System.Collections;
+
+using UnityEngine;
+
 public class GameManager : MonoBehaviour
 {
-	[SerializeField] private InteractorManager _interactorManager;
-	[SerializeField] private Transform _player;
-	[SerializeField] private FadeScreenManager _fadeScreen;
-	private string _sport = null;
+	public int NumberPlayers { get; set; }
+	public SoundManager SoundManager { get; set; }
+	public AccessibilityManager AccessibilityManager { get; set; }
+	public PauseMenuManager PauseMenuManager { get; set; }
+	public NetworkManager NetworkManager { get; set; }
+	public DataManager DataManager { get; set; }
+	public TutorialManager TutorialManager { get; set; }
+	public static GameManager Instance { get; set; }
+	public GameObject Player { get; set; }
 
-	private void Awake() => _interactorManager.ToggleMenuBehavior();
+	[SerializeField] private FadeScreenManager _fadeScreenManager;
+	[SerializeField] private SoundManager _soundManager;
+	[SerializeField] private AccessibilityManager _accessibilityManager;
+	[SerializeField] private PauseMenuManager _pauseMenuManager;
+	[SerializeField] private NetworkManager _networkManager;
+	[SerializeField] private DataManager _dataManager;
+	[SerializeField] private TutorialManager _tutorialManager;
 
-	/// <summary>
-	/// Sets which sport will be loaded.
-	/// </summary>
-	/// <param name="sportName">Name of the sport to load</param>
+	private string _sport;
+
+	private void Start()
+	{
+		PhotonNetwork.AutomaticallySyncScene = true;
+		Instance = this;
+		SoundManager = _soundManager;
+		AccessibilityManager = _accessibilityManager;
+		PauseMenuManager = _pauseMenuManager;
+		NetworkManager = _networkManager;
+		DataManager = _dataManager;
+		TutorialManager = _tutorialManager;
+		NetworkManager.PauseMenu = PauseMenuManager.PauseMenu;
+		DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad(PauseMenuManager.PauseMenu);
+	}
+
 	public void SetSport(string sportName) => _sport = sportName;
 
-	/// <summary>
-	/// Unsets the sport to load when the user goes back.
-	/// </summary>
 	public void UnsetSport() => _sport = null;
 
-	/// <summary>
-	/// Loads the scene of the sport.
-	/// </summary>
 	public void LoadSport()
 	{
 		if (_sport != null)
-			StartCoroutine(LoadScene(_sport));
-		else
-			return;
+			StartCoroutine(LoadScene());
 	}
 
-	private IEnumerator LoadScene(string sceneName)
+	private IEnumerator LoadScene()
 	{
-		_fadeScreen.FadeOut();
-		yield return new WaitForSeconds(_fadeScreen.FadeDuration);
+		NetworkManager.Game = _sport;
+		PhotonNetwork.OfflineMode = NumberPlayers != 2;
 
-		AsyncOperation loadAsync = SceneManager.LoadSceneAsync(sceneName);
-		loadAsync.allowSceneActivation = false;
+		if (!PhotonNetwork.OfflineMode)
+			PhotonNetwork.ConnectUsingSettings();
 
-		while (!loadAsync.isDone)
-		{
-			if (loadAsync.progress >= 0.9f)
-				loadAsync.allowSceneActivation = true;
-			yield return null;
-		}
+		_fadeScreenManager.FadeOut();
+		yield return new WaitForSeconds(_fadeScreenManager.FadeDuration);
 
-		if (sceneName.Equals("MainMenu"))
-			_interactorManager.ToggleMenuBehavior();
-		else
-			_interactorManager.ToggleMenuBehavior(false);
-
-		Transform spawnPoint = GameObject.FindWithTag("SpawnPoint").transform;
-
-		_player.position = spawnPoint.position;
-		_player.rotation = spawnPoint.rotation;
-
-		_fadeScreen.FadeIn();
-		yield return new WaitForSeconds(_fadeScreen.FadeDuration);
+		if (PhotonNetwork.IsMasterClient)
+			PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = NumberPlayers });
 	}
 
-	/// <summary>
-	/// Quits the game.
-	/// </summary>
 	public void QuitGame()
 	{
 		/* REMOVE THE UNITY EDITOR LINE IN FINAL VERSION */
-		#if UNITY_EDITOR
+#if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;
-		#else
+#else
 		Application.Quit();
-		#endif
+#endif
 	}
 }
