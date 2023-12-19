@@ -1,3 +1,7 @@
+using Photon.Pun;
+
+using System.Collections;
+
 using UnityEngine;
 
 public class Pin : MonoBehaviour
@@ -19,7 +23,14 @@ public class Pin : MonoBehaviour
 			_knocked = true;
 			_bowlingManager.ScoreFrame++;
 			_bowlingManager.Pins.Remove(gameObject);
-			Destroy(gameObject, 1f);
+			StartCoroutine(DelayedDestroy(1.5f));
 		}
 	}
+
+	private IEnumerator DelayedDestroy(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		PhotonNetwork.Destroy(gameObject);
+	}
+
 }

@@ -38,17 +38,26 @@ public class BowlingManager : MonoBehaviour
 	void Start()
 	{
 		_frameScores = new int[21];
-		_isPlayerOne = PhotonNetwork.IsMasterClient;
 		Pins = new();
+		_isPlayerOne = PhotonNetwork.IsMasterClient;
+
 		_scoreBoard = _isPlayerOne ? GameObject.Find("Screen Player 1") : GameObject.Find("Screen Player 2");
 		_ballSpawnPoint = _isPlayerOne ? GameObject.Find("Ball Spawn Player 1").transform : GameObject.Find("Ball Spawn Player 2").transform;
 		_pinsSpawnPoint = _isPlayerOne ? GameObject.Find("Pins Spawn Player 1").transform : GameObject.Find("Pins Spawn Player 2").transform;
 		_pins = _isPlayerOne ? GameObject.FindWithTag("Pins1") : GameObject.FindWithTag("Pins2");
+
+		PhotonView photonView = _pins.GetPhotonView(); ;
+		photonView.ViewID = 0;
+		PhotonNetwork.AllocateViewID(photonView);
+
 		for (int i = 0; i < _pins.transform.childCount; i++)
 		{
 			Transform pin = _pins.transform.GetChild(i);
 			Pins.Add(pin.gameObject, (pin.position, pin.rotation));
 			pin.GetComponent<Pin>().enabled = true;
+			photonView = pin.gameObject.GetPhotonView();
+			photonView.ViewID = 0;
+			PhotonNetwork.AllocateViewID(photonView);
 		}
 		_colors = new Color[]
 		{
@@ -61,6 +70,7 @@ public class BowlingManager : MonoBehaviour
 			Color.yellow,
 			Color.magenta
 		};
+		SetBall();
 	}
 
 
@@ -152,15 +162,26 @@ public class BowlingManager : MonoBehaviour
 	{
 		GameObject ball = PhotonNetwork.Instantiate("BowlingBall", _ballSpawnPoint.position, _ballSpawnPoint.rotation);
 		ball.GetComponent<Renderer>().material.SetColor("_BaseColor", (Color)_colors.GetValue(Random.Range(0, _colors.Length)));
+
+		PhotonView photonView = ball.GetPhotonView();
+		photonView.ViewID = 0;
+		PhotonNetwork.AllocateViewID(photonView);
 	}
 
 	private void SetPins()
 	{
 		_pins = PhotonNetwork.Instantiate(_isPlayerOne ? "PinsPlayer1" : "PinsPlayer2", _pinsSpawnPoint.position, _pinsSpawnPoint.rotation);
+		PhotonView photonView = _pins.GetPhotonView();
+		photonView.ViewID = 0;
+
+
 		for (int i = 0; i < _pins.transform.childCount; i++)
 		{
 			Transform pin = _pins.transform.GetChild(i);
 			Pins.Add(pin.gameObject, (pin.position, pin.rotation));
+			photonView = pin.gameObject.GetPhotonView();
+			photonView.ViewID = 0;
+			PhotonNetwork.AllocateViewID(photonView);
 		}
 	}
 
@@ -207,7 +228,7 @@ public class BowlingManager : MonoBehaviour
 		else
 		{
 			Pins.Clear();
-			Destroy(_pins);
+			PhotonNetwork.Destroy(_pins);
 			SetPins();
 			_remainingPins = 10;
 			SetBall();

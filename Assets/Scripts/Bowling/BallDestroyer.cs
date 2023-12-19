@@ -1,3 +1,5 @@
+using Photon.Pun;
+
 using UnityEngine;
 
 public class BallDestroyer : MonoBehaviour
@@ -8,7 +10,7 @@ public class BallDestroyer : MonoBehaviour
 	{
 		if (other.CompareTag("BowlingBall"))
 		{
-			Destroy(other.gameObject);
+			PhotonNetwork.Destroy(other.gameObject);
 			if (_bowlingManager == null)
 				_bowlingManager = GameManager.Instance.GetComponent<BowlingManager>();
 			_bowlingManager.BallDestroyed = true;

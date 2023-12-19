@@ -16,9 +16,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 	public override void OnJoinedRoom() => StartCoroutine(LoadPlayer());
 
+	public override void OnJoinRoomFailed(short returnCode, string message) => Debug.Log($"{returnCode} {message}");
+
 	public override void OnLeftRoom()
 	{
-		Destroy(GameManager.Instance.gameObject);
+		PhotonNetwork.Destroy(GameManager.Instance.gameObject);
+		PhotonNetwork.DestroyAll();
 		SceneManager.LoadScene(1);
 	}
 
@@ -26,12 +29,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 	{
 		PhotonNetwork.LoadLevel(Game);
 		_gameManager = GameManager.Instance;
+		PhotonView photonView = _gameManager.gameObject.GetPhotonView();
+		photonView.ViewID = 0;
+		PhotonNetwork.AllocateViewID(photonView);
 
 		while (PhotonNetwork.LevelLoadingProgress < 1)
 			yield return null;
 
 		Transform spawnPoint = PhotonNetwork.IsMasterClient ? GameObject.Find("Spawn Point Player 1").transform : GameObject.Find("Spawn Point Player 2").transform;
 		_player = PhotonNetwork.Instantiate(_playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+		photonView = _player.GetPhotonView();
+		photonView.ViewID = 0;
+		PhotonNetwork.AllocateViewID(photonView);
 		GameManager.Instance.Player = _player;
 
 		FadeScreenManager fadeScreenManager = _player.transform.GetComponentInChildren<FadeScreenManager>();

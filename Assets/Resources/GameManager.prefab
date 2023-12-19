@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 997359592414798826}
   - component: {fileID: 6919691446843287942}
   - component: {fileID: 5419125908603325929}
+  - component: {fileID: 8592924267437590481}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -50,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322fd44db3d582144bac5abd0c949db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _version: {fileID: 0}
+  _code: {fileID: 0}
   _fadeScreenManager: {fileID: 0}
   _soundManager: {fileID: 6164844864126170698}
   _accessibilityManager: {fileID: 8936886365723003011}
@@ -145,3 +148,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f7f6900bb449a48b8102d194aa9457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8592924267437590481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939479365913790822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
