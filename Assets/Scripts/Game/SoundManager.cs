@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour
 		_mixer.SetFloat("bgmVol", volumeModifier - 20);
 		float sfxValue = SFXSldier.value;
 		volumeModifier = sfxValue != 0 ? (20 * Mathf.Log10(sfxValue)) : -80f;
-		_mixer.SetFloat("sfxVol", volumeModifier - 25); 
+		_mixer.SetFloat("sfxVol", volumeModifier); 
 		SaveSoundSettings();
 	}
 

@@ -22512,30 +22512,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1169925178358957409, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 711380275858802113, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.7
+      propertyPath: m_TagString
+      value: Gutter
       objectReference: {fileID: 0}
-    - target: {fileID: 1291352757698250237, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2742.5735
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 1291352757698250237, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3105.8113
+      propertyPath: m_fontSize
+      value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 1291352757698250237, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1333.36
+      propertyPath: m_margin.y
+      value: 2.0069656
       objectReference: {fileID: 0}
-    - target: {fileID: 1291352757698250237, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2257.94
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c6091b71f3133f4e90770c6856303bb,
+        type: 2}
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2154672724708335580, guid: 4c6091b71f3133f4e90770c6856303bb,
+        type: 2}
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 856185734546874906, guid: 623d44e6447c8254da58bbfdba62568e,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1314362870282206683, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
@@ -22587,55 +22614,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1466622980137980887, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 1602387030588785880, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.46054462
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -2154672724708335580, guid: 4c6091b71f3133f4e90770c6856303bb,
+        type: 2}
+    - target: {fileID: 1756898852224230410, guid: 623d44e6447c8254da58bbfdba62568e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Alley
       objectReference: {fileID: 0}
-    - target: {fileID: 1466622980137980887, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 2112239426572922322, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1965.6
+      propertyPath: m_TagString
+      value: Gutter
       objectReference: {fileID: 0}
-    - target: {fileID: 3889473449831384716, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 3462626444557596296, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4992442236608965964, guid: 623d44e6447c8254da58bbfdba62568e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.7
+      propertyPath: m_TagString
+      value: Gutter
       objectReference: {fileID: 0}
     - target: {fileID: 5419822554808600970, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
       propertyPath: m_Name
       value: Bowling Room
       objectReference: {fileID: 0}
-    - target: {fileID: 5525717837397990910, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 7469289906113140608, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.7
+      propertyPath: m_TagString
+      value: Alley
       objectReference: {fileID: 0}
-    - target: {fileID: 6470608392975339447, guid: 623d44e6447c8254da58bbfdba62568e,
+    - target: {fileID: 8148922242437857901, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
-      propertyPath: m_Name
-      value: Ceiling
-      objectReference: {fileID: 0}
-    - target: {fileID: 7235106759571705502, guid: 623d44e6447c8254da58bbfdba62568e,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: aa803f8cf536b10439e1bc31a17b3694, type: 2}
-    - target: {fileID: 8961846266943315574, guid: 623d44e6447c8254da58bbfdba62568e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.7
+      propertyPath: m_TagString
+      value: Gutter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1382453446626351140, guid: 623d44e6447c8254da58bbfdba62568e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 3124117581561903166, guid: 623d44e6447c8254da58bbfdba62568e,
         type: 3}
       insertIndex: -1

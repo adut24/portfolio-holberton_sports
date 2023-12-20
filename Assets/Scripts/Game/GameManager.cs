@@ -1,10 +1,6 @@
 using Photon.Pun;
-using Photon.Realtime;
-
 using System.Collections;
-
 using TMPro;
-
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,7 +16,6 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance { get; set; }
 
 	[SerializeField] private TextMeshProUGUI _version;
-	[SerializeField] private TextMeshProUGUI _code;
 	[SerializeField] private FadeScreenManager _fadeScreenManager;
 	[SerializeField] private SoundManager _soundManager;
 	[SerializeField] private AccessibilityManager _accessibilityManager;
@@ -39,6 +34,7 @@ public class GameManager : MonoBehaviour
 		PhotonNetwork.AutomaticallySyncScene = true;
 		_version.text = string.Format("version {0}", Application.version);
 		PhotonNetwork.GameVersion = Application.version;
+		PhotonNetwork.Disconnect();
 
 		SoundManager = _soundManager;
 		AccessibilityManager = _accessibilityManager;
@@ -65,46 +61,30 @@ public class GameManager : MonoBehaviour
 	private IEnumerator LoadScene()
 	{
 		NetworkManager.Game = _sport;
-		PhotonNetwork.OfflineMode = NumberPlayers != 2;
-
-		if (!PhotonNetwork.OfflineMode)
-		{
-			PhotonNetwork.ConnectUsingSettings();
-			while (!PhotonNetwork.IsConnectedAndReady)
-				yield return null;
-		}
+		NetworkManager.RoomCode = _roomCode;
+		NetworkManager.NumberPlayers = NumberPlayers;
+		NetworkManager.IsCreator = true;
 
 		_fadeScreenManager.FadeOut();
 		yield return new WaitForSeconds(_fadeScreenManager.FadeDuration);
 
-		PhotonNetwork.CreateRoom(_roomCode, new RoomOptions { MaxPlayers = NumberPlayers });
+		PhotonNetwork.OfflineMode = NumberPlayers != 2;
+		if (!PhotonNetwork.OfflineMode)
+			PhotonNetwork.ConnectUsingSettings();
 	}
 
-	public void JoinScene(TextMeshProUGUI code)
-	{
-		_roomCode = code.text;
-		StartCoroutine(LoadPlayerTwo());
-	}
-
-	private IEnumerator LoadPlayerTwo()
+	public void ConnectPlayerTwo()
 	{
 		NetworkManager.Game = _sport;
+		NetworkManager.IsCreator = false;
+
 		PhotonNetwork.OfflineMode = false;
 		PhotonNetwork.ConnectUsingSettings();
-
-		while (!PhotonNetwork.IsConnectedAndReady)
-			yield return null;
-
-		_fadeScreenManager.FadeOut();
-		yield return new WaitForSeconds(_fadeScreenManager.FadeDuration);
-
-		PhotonNetwork.JoinRoom(_roomCode);
 	}
 
 	public void GenerateRoomCode()
 	{
 		string alphaNumChar = Random.Range(0000, 10000).ToString("D4") + Random.Range(0000, 10000).ToString("D4");
-
 		string finalCode = "";
 
 		for (int i = 0; i < alphaNumChar.Length; i++)
@@ -116,7 +96,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		_roomCode = finalCode;
-		_code.text = _roomCode;
 	}
 
 

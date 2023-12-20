@@ -85,7 +85,6 @@ public class PauseMenuManager : MonoBehaviour
 		_menuRectTransform.rotation = Quaternion.Euler(0, 0, 0);
 	}
 
-
 	public void ReturnToMenu()
 	{
 		if (PhotonNetwork.OfflineMode)

@@ -19,8 +19,12 @@ Coming soon
 
 ## Credits
 ### Bowling
+#### Models
 - "Bowling Pack (Bowling Pins & Ball)" (https://skfb.ly/oHTtQ) by EverZax is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+#### Textures
 - Parquet (https://free-3dtextureshd.com/download/wood-floor-parquet-bright-texture-3d-bpr-free-download-seamless-hd-4k/)
+#### Sounds
+- https://www.youtube.com/watch?v=El_hlnHnxDw
 ### Archery
 - "2020 Tokyo Olympic | Archery robin arrow" (https://skfb.ly/ouNYZ) by onlyone__o is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 - "Olympic recurve bow Free 3D model" (https://www.cgtrader.com/free-3d-models/sports/equipment/olympic-recurve-bow) by IZ-MdVerz.

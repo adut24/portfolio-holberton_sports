@@ -63,7 +63,8 @@ namespace Photon.Pun.UtilityScripts
 
 #if UNITY_EDITOR
 
-        protected void OnValidate()
+		[System.Obsolete]
+		protected void OnValidate()
         {
             /// Check the prefab to make sure it is the actual resource, and not a scene object or other instance.
             if (PrefabsToInstantiate != null)
@@ -85,11 +86,12 @@ namespace Photon.Pun.UtilityScripts
             }
         }
 
-        /// <summary>
-        /// Validate, and if valid add this prefab to the first null element of the list, or create a new element. Returns true if the object was added.
-        /// </summary>
-        /// <param name="prefab"></param>
-        public bool AddPrefabToList(GameObject prefab)
+		/// <summary>
+		/// Validate, and if valid add this prefab to the first null element of the list, or create a new element. Returns true if the object was added.
+		/// </summary>
+		/// <param name="prefab"></param>
+		[System.Obsolete]
+		public bool AddPrefabToList(GameObject prefab)
         {
             var validated = ValidatePrefab(prefab);
             if (validated)
