@@ -33,13 +33,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7217269412509568475}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.940237, y: 1.9004844, z: -27.137}
+  m_LocalRotation: {x: 0.19807021, y: -0.6761902, z: -0.6996841, w: -0.11822554}
+  m_LocalPosition: {x: 26.947891, y: 1.9024122, z: -27.136696}
   m_LocalScale: {x: 125, y: 125, z: 125}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -83.252, y: -86.55, z: -119.343}
 --- !u!33 &6274482444088114598
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
   - {fileID: -6529548760641529989}
@@ -439,6 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79db0ba29dff05840a75aeeada1f27ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _grabComponent: {fileID: 3953783723440042343}
+  _renderer: {fileID: 6039686563050203436}
   _audioSource: {fileID: -5157070637166727193}
   _hitAlleyClip: {fileID: 8300000, guid: acef740e47f0eea4e8e393e8b9797038, type: 3}
   _rollAlleyClip: {fileID: 8300000, guid: 30a5571a4447293429369bbcff4d68d4, type: 3}

@@ -13,6 +13,7 @@ TagManager:
   - Replay
   - Alley
   - Gutter
+  - Pin
   layers:
   - Default
   - TransparentFX

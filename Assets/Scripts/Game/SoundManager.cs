@@ -13,7 +13,7 @@ public class SoundManager : MonoBehaviour
 	[SerializeField] private Slider _bgmSlider;
 	[SerializeField] private Slider _sfxSlider;
 
-    private string _filePath;
+	private string _filePath;
 
 	private void Awake()
 	{

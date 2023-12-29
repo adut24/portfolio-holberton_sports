@@ -1,25 +1,55 @@
-using UnityEngine;
 using Photon.Pun;
-using System.Collections;
-using UnityEngine.SceneManagement;
-using System.Linq;
 using Photon.Realtime;
+
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 using TMPro;
+
+using Unity.XR.CoreUtils;
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Responsible for managing the callbacks from the Photon server.
+/// </summary>
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-	public string Game { get; set; }
+	/// <summary>
+	/// Gets or sets the name of the sport played
+	/// </summary>
+	public string Sport { get; set; }
+
+	/// <summary>
+	/// Gets or sets the generated code of the room.
+	/// </summary>
 	public string RoomCode { get; set; }
-	public int NumberPlayers { get; set; }
+
+	/// <summary>
+	/// Gets or sets if the client is the one that should create the room.
+	/// </summary>
 	public bool IsCreator { get; set; }
+
+	/// <summary>
+	/// Gets or sets if the room to create should be private or public.
+	/// </summary>
+	public bool IsPublic { get; set; }
+
+	/// <summary>
+	/// Gets or sets the GameObject representing the pause menu.
+	/// </summary>
 	public GameObject PauseMenu { get; set; }
 
 	[SerializeField] private GameObject _playerPrefab;
 	[SerializeField] private GameObject _player;
+	[SerializeField] private GameObject _roomButtonPrefab;
 	[SerializeField] private Transform _roomListContent;
-	[SerializeField] private GameObject _roomButton;
+	[SerializeField] private FadeScreenManager _menuFadeManager;
+	[SerializeField] private TextMeshProUGUI _errorText;
+	[SerializeField] private TextMeshProUGUI _codeText;
 
 	private GameManager _gameManager;
 
@@ -28,7 +58,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 		if (!PhotonNetwork.OfflineMode)
 			PhotonNetwork.JoinLobby();
 		else
-			PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = NumberPlayers, });
+			PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 1 });
 	}
 
 	public override void OnJoinedLobby()
@@ -37,8 +67,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 			PhotonNetwork.CreateRoom(RoomCode,
 									 new RoomOptions
 									 {
-										 MaxPlayers = NumberPlayers,
-										 IsVisible = true,
+										 MaxPlayers = 2,
+										 IsVisible = IsPublic,
 										 IsOpen = true
 									 },
 									 TypedLobby.Default);
@@ -53,77 +83,106 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 		{
 			if (room.PlayerCount != room.MaxPlayers)
 			{
-				GameObject roomButton = Instantiate(_roomButton, _roomListContent);
-				roomButton.GetComponentInChildren<TextMeshPro>().text = room.Name;
+				GameObject roomButton = Instantiate(_roomButtonPrefab, _roomListContent);
+				roomButton.GetComponentInChildren<TextMeshProUGUI>().text = room.Name;
 				roomButton.GetComponent<Button>().onClick.AddListener(() => Connect(room.Name));
 			}
 		}
 	}
 
-	public override void OnJoinedRoom() => StartCoroutine(LoadPlayer());
+	public override void OnJoinedRoom()
+	{
+		if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
+			StartCoroutine(FadePlayerTwo());
+		StartCoroutine(LoadPlayer());
+	}
+
+	private IEnumerator FadePlayerTwo()
+	{
+		_menuFadeManager.FadeOut();
+		yield return new WaitForSeconds(_menuFadeManager.FadeDuration);
+	}
+
+	public override void OnJoinRoomFailed(short returnCode, string message)
+	{
+		if (IsCreator)
+		{
+			_menuFadeManager.FadeIn();
+			_codeText.text = "Max number of players reached";
+		}
+		else
+		{
+			switch (returnCode)
+			{
+				case ErrorCode.GameDoesNotExist:
+					_errorText.text = "No opened room with this ID was found";
+					break;
+				case ErrorCode.GameFull:
+					_errorText.text = "This room is full";
+					break;
+				case ErrorCode.GameClosed:
+					_errorText.text = "This room was closed";
+					break;
+			}
+		}
+	}
 
 	public override void OnLeftRoom()
 	{
+		PhotonNetwork.Destroy(_player);
 		PhotonNetwork.Destroy(GameManager.Instance.gameObject);
 		if (PhotonNetwork.IsMasterClient)
 			PhotonNetwork.DestroyAll();
 		SceneManager.LoadScene(1);
 		if (!PhotonNetwork.OfflineMode)
-		{
 			PhotonNetwork.LeaveLobby();
-			PhotonNetwork.Disconnect();
-		}
+		Disconnect();
 	}
 
-	public override void OnPlayerEnteredRoom(Player newPlayer)
-	{
-	}
-
-	public void Connect(string roomName) => StartCoroutine(LoadScene(roomName));
-
-	private IEnumerator LoadScene(string roomName)
-	{
-		FadeScreenManager fade = _player.GetComponentInChildren<FadeScreenManager>();
-		fade.FadeOut();
-		yield return new WaitForSeconds(fade.FadeDuration);
-
-		PhotonNetwork.JoinRoom(roomName);
-	}
+	public void Connect(string roomName) => PhotonNetwork.JoinRoom(roomName);
 
 	public IEnumerator LoadPlayer()
 	{
-		PhotonNetwork.LoadLevel(Game);
+		PhotonNetwork.LoadLevel(Sport);
 		_gameManager = GameManager.Instance;
-		PhotonView photonView = _gameManager.gameObject.GetPhotonView();
-		photonView.ViewID = 0;
-		PhotonNetwork.AllocateViewID(photonView);
 
 		while (PhotonNetwork.LevelLoadingProgress < 1)
 			yield return null;
 
-		Transform spawnPoint = PhotonNetwork.IsMasterClient ? GameObject.Find("Spawn Point Player 1").transform : GameObject.Find("Spawn Point Player 2").transform;
-		_player = PhotonNetwork.Instantiate(_playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
-		photonView = _player.GetPhotonView();
-		photonView.ViewID = 0;
-		PhotonNetwork.AllocateViewID(photonView);
+		Transform spawnPoint = PhotonNetwork.LocalPlayer.ActorNumber == 1 ? GameObject.Find("Spawn Point Player 1").transform : GameObject.Find("Spawn Point Player 2").transform;
+		_player = PhotonNetwork.Instantiate(_playerPrefab.name, spawnPoint.position, spawnPoint.rotation, 0);
 		GameManager.Instance.Player = _player;
 
-		FadeScreenManager fadeScreenManager = _player.transform.GetComponentInChildren<FadeScreenManager>();
+		PhotonView managerView = _gameManager.gameObject.GetPhotonView();
+		managerView.ViewID = 0;
+		PhotonNetwork.AllocateViewID(managerView);
+
+		Transform rigTransform = GameObject.FindWithTag("Player").transform;
+		rigTransform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
+		NetworkPlayer networkPlayer = _player.GetComponent<NetworkPlayer>();
+		networkPlayer.HeadRig = rigTransform.Find("Camera Offset/Camera");
+		networkPlayer.LeftHandRayRig = rigTransform.Find("Camera Offset/LeftRay");
+		networkPlayer.RightHandRayRig = rigTransform.Find("Camera Offset/RightRay");
+		networkPlayer.LeftHandDirectRig = rigTransform.Find("Camera Offset/LeftDirect");
+		networkPlayer.RightHandDirectRig = rigTransform.Find("Camera Offset/RightDirect");
+		networkPlayer.LeftHandDirectRig.gameObject.SetActive(false);
+		networkPlayer.RightHandDirectRig.gameObject.SetActive(false);
+
+		FadeScreenManager fadeScreenManager = rigTransform.GetComponentInChildren<FadeScreenManager>();
 		fadeScreenManager.enabled = true;
 		yield return null;
 
-		_gameManager.PauseMenuManager.PauseMenu = PauseMenu;
+		PauseMenuManager pauseMenuManager = _gameManager.PauseMenuManager;
+		pauseMenuManager.PauseMenu = PauseMenu;
+		pauseMenuManager.IsNotMainMenu = true;
 		PauseMenu.transform.SetParent(_player.transform, false);
 
 		GameObject tutorial = GameObject.FindGameObjectsWithTag("Tutorial").FirstOrDefault(obj => obj.transform.parent == null);
-
 		if (tutorial != null)
 			tutorial.transform.SetParent(_player.transform, false);
 
 		PrepareGameManager(fadeScreenManager);
-
-		if (!PhotonNetwork.OfflineMode)
-			GameObject.Find("ScreenMultifunction").GetComponentInChildren<TextMeshPro>().text = RoomCode;
 
 		fadeScreenManager.FadeIn();
 		yield return new WaitForSeconds(fadeScreenManager.FadeDuration);
@@ -131,10 +190,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 	private void PrepareGameManager(FadeScreenManager fadeScreen)
 	{
-		switch (Game)
+		switch (Sport)
 		{
 			case "Bowling":
 				BowlingManager manager = _gameManager.gameObject.AddComponent<BowlingManager>();
+				_gameManager.BowlingManager = manager;
 				manager.FadeScreen = fadeScreen;
 				manager.PauseManager = GameManager.Instance.PauseMenuManager;
 				manager.ReplayMenu = GameObject.FindGameObjectsWithTag("Replay").FirstOrDefault(obj => obj.transform.parent == null);
@@ -146,6 +206,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 				}
 				break;
 		}
-		_gameManager.PauseMenuManager.InteractorManager = _player.GetComponent<InteractorManager>();
+		_gameManager.PauseMenuManager.InteractorManager = FindObjectOfType<XROrigin>().transform.GetComponent<InteractorManager>();
 	}
+
+	/// <summary>
+	/// Disconnects from the Photon servers.
+	/// </summary>
+	public void Disconnect() => PhotonNetwork.Disconnect();
+
 }

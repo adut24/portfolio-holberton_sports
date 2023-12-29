@@ -36,6 +36,11 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
+  - RPC_SetColor
+  - UpdateScoreOnClients
+  - ManageStrikeAndSpare
+  - WriteScore
+  - ManagerStrikeAndSpareState
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -5,13 +5,44 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Responsible for managing the pause menu behaviour.
+/// </summary>
 public class PauseMenuManager : MonoBehaviour
 {
+	/// <summary>
+	/// Gets or sets if the client is in the main menu scene or not.
+	/// </summary>
+	public bool IsNotMainMenu { get; set; }
+
+	/// <summary>
+	/// Gets or sets the component to write the title on the pause menu.
+	/// </summary>
 	public TextMeshProUGUI TitleText { get; set; }
+
+	/// <summary>
+	/// Gets or sets the child containing the accessibility menu.
+	/// </summary>
 	public GameObject AccessibilityMenu { get; set; }
+
+	/// <summary>
+	/// Gets or sets the child containing the options menu.
+	/// </summary>
 	public GameObject OptionsMenu { get; set; }
-	public GameObject PauseMenu { get; set; }
+
+	/// <summary>
+	/// Gets or sets the child containing the buttons displayed in the pause menu.
+	/// </summary>
 	public GameObject PauseButtons { get; set; }
+
+	/// <summary>
+	/// Gets or sets the pause menu GameObject.
+	/// </summary>
+	public GameObject PauseMenu { get; set; }
+
+	/// <summary>
+	/// Gets or sets the component managing the fade in / fade out system.
+	/// </summary>
 	public InteractorManager InteractorManager { get; set; }
 
 	[SerializeField] private GameObject _menuCanvas;
@@ -28,10 +59,19 @@ public class PauseMenuManager : MonoBehaviour
 	private Vector3 _originalPosition;
 	private const string PAUSE = "PAUSE";
 
+	/// <summary>
+	/// Called when the object becomes enabled and active. Enables the possibility to press the start button.
+	/// </summary>
 	private void OnEnable() => _menuButton.action.Enable();
 
+	/// <summary>
+	/// Called when the object becomes disabled or inactive. Disables the possibility to press the start button.
+	/// </summary>
 	private void OnDisable() => _menuButton.action.Disable();
 
+	/// <summary>
+	/// Called when the instance is being loaded.
+	/// </summary>
 	private void Awake()
 	{
 		TitleText = _titleText;
@@ -42,12 +82,18 @@ public class PauseMenuManager : MonoBehaviour
 		InteractorManager = _interactorManager;
 	}
 
+	/// <summary>
+	/// Called every frame. Checks if the player pressed the start button or not and if they aren't in the main menu scene.
+	/// </summary>
 	private void Update()
 	{
-		if (_menuButton.action.triggered)
+		if (_menuButton.action.triggered && IsNotMainMenu)
 			ManagePauseMenu();
 	}
 
+	/// <summary>
+	/// Manages the state of the pause menu depending on if the game is paused or not.
+	/// </summary>
 	public void ManagePauseMenu()
 	{
 		if (!_isPaused)
@@ -68,6 +114,9 @@ public class PauseMenuManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Reloads the scene to restart the game that was in progress.
+	/// </summary>
 	public void RestartGame()
 	{
 		if (_menuRectTransform == null)
@@ -85,6 +134,9 @@ public class PauseMenuManager : MonoBehaviour
 		_menuRectTransform.rotation = Quaternion.Euler(0, 0, 0);
 	}
 
+	/// <summary>
+	/// Returns to the main menu. If the player leaving the room is the one that created it, the room is closed.
+	/// </summary>
 	public void ReturnToMenu()
 	{
 		if (PhotonNetwork.OfflineMode)
@@ -93,7 +145,10 @@ public class PauseMenuManager : MonoBehaviour
 			PhotonNetwork.CurrentRoom.IsOpen = false;
 		PhotonNetwork.LeaveRoom();
 	}
-
+	
+	/// <summary>
+	/// Sets the return from the options menu correctly depending on where the player is.
+	/// </summary>
 	public void ReturnFromOptions()
 	{
 		if (_isPaused)
@@ -112,6 +167,9 @@ public class PauseMenuManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Resets the GameObject to its base state and hides it.
+	/// </summary>
 	private void HideMenu()
 	{
 		TitleText.text = PAUSE;

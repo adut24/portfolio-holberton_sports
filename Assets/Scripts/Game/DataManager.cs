@@ -2,39 +2,71 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
-using System.Text;
 
 using UnityEngine;
 
-[Serializable]
 public class DataManager : MonoBehaviour
 {
 	public string UserId { get; private set; }
-	public Dictionary<string, (int, int)> MatchHistory { get; set; }
-	public Dictionary<string, int> HighScores { get; set; }
-	private string _filePath;
+	public Dictionary<string, (int, int)> MatchHistory { get; private set; }
+	public Dictionary<string, int> HighScores { get; private set; }
 
-	private void Start()
+	private string _filePath;
+	private Data _data;
+
+	private void Awake()
 	{
 		_filePath = Path.Combine(Application.persistentDataPath, "data.sav");
+		_data = new Data();
+		MatchHistory = new();
+		HighScores = new();
 	}
+}
 
-	private string ToJson() => JsonUtility.ToJson(this);
+[Serializable]
+public class Data
+{
+	public string id;
+	public List<ScoreEntry> highScores;
+	public List<MatchEntry> matchHistory;
+}
+
+[Serializable]
+public class ScoreEntry
+{
+	public string sportName;
+	public int score;
+}
+
+[Serializable]
+public class MatchEntry
+{
+	public string opponentID;
+	public (int, int) results;
 }
 
 public static class EncryptionSystem
 {
-	private static string _key;
+	private static byte[] _key;
 
 	static EncryptionSystem()
 	{
-
+		string path = Path.Combine(Application.persistentDataPath, "BlueHarmony.dat");
+		if (File.Exists(path))
+		{
+			if (new FileInfo(path).Length > 0)
+				_key = File.ReadAllBytes(path);
+			else
+				_key = GenerateRandomAesKey();
+		}
+		else
+			_key = GenerateRandomAesKey();
 	}
 
 	public static string EncryptAES(string input)
 	{
 		using Aes aes = Aes.Create();
-		aes.Key = Encoding.UTF8.GetBytes(_key);
+		aes.Key = _key;
 		aes.IV = new byte[16];
 
 		ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
@@ -52,7 +84,7 @@ public static class EncryptionSystem
 		try
 		{
 			using Aes aes = Aes.Create();
-			aes.Key = Encoding.UTF8.GetBytes(_key);
+			aes.Key = _key;
 			aes.IV = new byte[16];
 
 			ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
@@ -68,7 +100,7 @@ public static class EncryptionSystem
 		}
 	}
 
-	private static string GenerateRandomAesKey()
+	private static byte[] GenerateRandomAesKey()
 	{
 		int[] keyLengths = { 128, 192, 256 };
 
@@ -78,6 +110,6 @@ public static class EncryptionSystem
 		using RNGCryptoServiceProvider rng = new();
 		rng.GetBytes(key);
 
-		return key.ToString();
+		return key;
 	}
 }
