@@ -18,8 +18,7 @@ public class Ball : MonoBehaviourPun
 	[SerializeField] private XRGrabInteractable _grabComponent;
 	[SerializeField] private Renderer _renderer;
 	[SerializeField] private AudioSource _audioSource;
-	[SerializeField] private AudioClip _hitAlleyClip;
-	[SerializeField] private AudioClip _rollAlleyClip;
+	[SerializeField] private AudioClip _hitClip;
 
 	/// <summary>
 	/// Called when the script instance is being loaded. Enables events regarding the grab of the ball and sets that the color is the same accross the clients.
@@ -57,7 +56,8 @@ public class Ball : MonoBehaviourPun
 	/// <param name="collision">The data associated with this event.</param>
 	private void OnCollisionEnter(Collision collision)
 	{
-		_audioSource.PlayOneShot(_hitAlleyClip);
+		if (!collision.transform.CompareTag("Pin"))
+			_audioSource.PlayOneShot(_hitClip);
 	}
 
 	/// <summary>

@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 
 using System.Collections;
@@ -29,11 +30,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 	public string RoomCode { get; set; }
 
 	/// <summary>
-	/// Gets or sets if the client is the one that should create the room.
-	/// </summary>
-	public bool IsCreator { get; set; }
-
-	/// <summary>
 	/// Gets or sets if the room to create should be private or public.
 	/// </summary>
 	public bool IsPublic { get; set; }
@@ -44,15 +40,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 	public GameObject PauseMenu { get; set; }
 
 	[SerializeField] private GameObject _playerPrefab;
-	[SerializeField] private GameObject _player;
 	[SerializeField] private GameObject _roomButtonPrefab;
+	[SerializeField] private GameObject _errorMenu;
+	[SerializeField] private GameObject _roomMenu;
+	[SerializeField] private TextMeshProUGUI _errorConnectText;
+	[SerializeField] private TextMeshProUGUI _errorJoinText;
 	[SerializeField] private Transform _roomListContent;
 	[SerializeField] private FadeScreenManager _menuFadeManager;
-	[SerializeField] private TextMeshProUGUI _errorText;
-	[SerializeField] private TextMeshProUGUI _codeText;
 
 	private GameManager _gameManager;
+	private GameObject _player;
+	private GameObject _multiplayerScreen;
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public override void OnConnectedToMaster()
 	{
 		if (!PhotonNetwork.OfflineMode)
@@ -61,23 +63,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 			PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 1 });
 	}
 
-	public override void OnJoinedLobby()
-	{
-		if (IsCreator)
-			PhotonNetwork.CreateRoom(RoomCode,
-									 new RoomOptions
-									 {
-										 MaxPlayers = 2,
-										 IsVisible = IsPublic,
-										 IsOpen = true
-									 },
-									 TypedLobby.Default);
-	}
-
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="roomList"></param>
 	public override void OnRoomListUpdate(List<RoomInfo> roomList)
 	{
-		foreach (Transform child in _roomListContent)
-			Destroy(child.gameObject);
+		foreach (Transform button in _roomListContent)
+			Destroy(button.gameObject);
 
 		foreach (RoomInfo room in roomList)
 		{
@@ -90,43 +83,34 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public override void OnJoinedRoom()
 	{
-		if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
-			StartCoroutine(FadePlayerTwo());
+		_gameManager = GameManager.Instance;
 		StartCoroutine(LoadPlayer());
 	}
 
-	private IEnumerator FadePlayerTwo()
-	{
-		_menuFadeManager.FadeOut();
-		yield return new WaitForSeconds(_menuFadeManager.FadeDuration);
-	}
-
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="returnCode"></param>
+	/// <param name="message"></param>
 	public override void OnJoinRoomFailed(short returnCode, string message)
 	{
-		if (IsCreator)
+		_errorJoinText.text = returnCode switch
 		{
-			_menuFadeManager.FadeIn();
-			_codeText.text = "Max number of players reached";
-		}
-		else
-		{
-			switch (returnCode)
-			{
-				case ErrorCode.GameDoesNotExist:
-					_errorText.text = "No opened room with this ID was found";
-					break;
-				case ErrorCode.GameFull:
-					_errorText.text = "This room is full";
-					break;
-				case ErrorCode.GameClosed:
-					_errorText.text = "This room was closed";
-					break;
-			}
-		}
+			ErrorCode.GameDoesNotExist => "No opened room with this ID was found",
+			ErrorCode.GameFull => "This room is full",
+			ErrorCode.GameClosed => "This room was closed",
+			_ => "An error occured",
+		};
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public override void OnLeftRoom()
 	{
 		PhotonNetwork.Destroy(_player);
@@ -139,17 +123,92 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 		Disconnect();
 	}
 
-	public void Connect(string roomName) => PhotonNetwork.JoinRoom(roomName);
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="cause"></param>
+	public override void OnDisconnected(DisconnectCause cause)
+	{
+		if (cause.Equals(DisconnectCause.MaxCcuReached))
+		{
+			_roomMenu.SetActive(false);
+			_errorMenu.SetActive(true);
+			_errorConnectText.text = "Max capacity reached";
+		}
+		else if (cause.Equals(DisconnectCause.ServerTimeout))
+		{
+			_roomMenu.SetActive(false);
+			_errorMenu.SetActive(true);
+			_errorConnectText.text = "No internet connection";
+		}
+	}
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="newPlayer"></param>
+	public override void OnPlayerEnteredRoom(Player newPlayer)
+	{
+		Debug.Log(newPlayer);
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public void CreateRoom() => PhotonNetwork.CreateRoom(RoomCode,
+														 new RoomOptions
+														 {
+															 MaxPlayers = 2,
+															 IsVisible = IsPublic,
+															 IsOpen = true
+														 },
+														 TypedLobby.Default);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="roomName"></param>
+	public void Connect(string roomName) => StartCoroutine(FadeThenJoin(roomName));
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	private IEnumerator FadeScreen()
+	{
+		_menuFadeManager.FadeOut();
+		yield return new WaitForSeconds(_menuFadeManager.FadeDuration);
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="roomName"></param>
+	/// <returns></returns>
+	private IEnumerator FadeThenJoin(string roomName)
+	{
+		RoomCode = roomName;
+		yield return StartCoroutine(FadeScreen());
+		PhotonNetwork.JoinRoom(roomName);
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
 	public IEnumerator LoadPlayer()
 	{
-		PhotonNetwork.LoadLevel(Sport);
-		_gameManager = GameManager.Instance;
+		bool isPlayerOne = PhotonNetwork.LocalPlayer.ActorNumber == 1;
 
-		while (PhotonNetwork.LevelLoadingProgress < 1)
-			yield return null;
+		if (isPlayerOne)
+		{
+			yield return StartCoroutine(FadeScreen());
+			PhotonNetwork.LoadLevel(Sport);
+			while (PhotonNetwork.LevelLoadingProgress < 1)
+				yield return null;
+		}
 
-		Transform spawnPoint = PhotonNetwork.LocalPlayer.ActorNumber == 1 ? GameObject.Find("Spawn Point Player 1").transform : GameObject.Find("Spawn Point Player 2").transform;
+		Transform spawnPoint = isPlayerOne ? GameObject.Find("Spawn Point Player 1").transform : GameObject.Find("Spawn Point Player 2").transform;
 		_player = PhotonNetwork.Instantiate(_playerPrefab.name, spawnPoint.position, spawnPoint.rotation, 0);
 		GameManager.Instance.Player = _player;
 
@@ -175,19 +234,27 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 		PauseMenuManager pauseMenuManager = _gameManager.PauseMenuManager;
 		pauseMenuManager.PauseMenu = PauseMenu;
-		pauseMenuManager.IsNotMainMenu = true;
 		PauseMenu.transform.SetParent(_player.transform, false);
 
 		GameObject tutorial = GameObject.FindGameObjectsWithTag("Tutorial").FirstOrDefault(obj => obj.transform.parent == null);
 		if (tutorial != null)
 			tutorial.transform.SetParent(_player.transform, false);
 
-		PrepareGameManager(fadeScreenManager);
+		_multiplayerScreen = GameObject.Find("MultiplayerScreen");
+		if (PhotonNetwork.OfflineMode)
+			Destroy(_multiplayerScreen);
+		else
+			_multiplayerScreen.transform.Find("CodeText").GetComponent<TextMeshPro>().text = RoomCode;
 
+		PrepareGameManager(fadeScreenManager);
 		fadeScreenManager.FadeIn();
 		yield return new WaitForSeconds(fadeScreenManager.FadeDuration);
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="fadeScreen"></param>
 	private void PrepareGameManager(FadeScreenManager fadeScreen)
 	{
 		switch (Sport)
@@ -210,8 +277,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 	}
 
 	/// <summary>
+	/// Connects to the Photon servers.
+	/// </summary>
+	public void ConnectToServer() => PhotonNetwork.ConnectUsingSettings();
+
+	/// <summary>
+	/// Indicates that the game will be played locally only.
+	/// </summary>
+	public void PlayOffline() => PhotonNetwork.OfflineMode = true;
+
+	/// <summary>
+	/// Indicates that the game will be played online.
+	/// </summary>
+	public void PlayOnline() => PhotonNetwork.OfflineMode = false;
+
+	/// <summary>
 	/// Disconnects from the Photon servers.
 	/// </summary>
 	public void Disconnect() => PhotonNetwork.Disconnect();
-
 }

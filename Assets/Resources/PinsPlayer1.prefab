@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 407250731514361944}
   - component: {fileID: 1802710833885266854}
   - component: {fileID: 5082028758550452972}
+  - component: {fileID: 5507180934683421944}
   m_Layer: 0
   m_Name: Bowling Pin 9
   m_TagString: Pin
@@ -212,7 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 5970965583670898203}
 --- !u!114 &1802710833885266854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,9 +249,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1802710833885266854}
+  - {fileID: 5507180934683421944}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &5507180934683421944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318946535554442843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1371026020277530357
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +285,7 @@ GameObject:
   - component: {fileID: 7900335641181427918}
   - component: {fileID: 7487635317870283791}
   - component: {fileID: 2836569241432299183}
+  - component: {fileID: 8739507449357653033}
   m_Layer: 0
   m_Name: Bowling Pin 2
   m_TagString: Pin
@@ -400,7 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 6499479089770953668}
 --- !u!114 &7487635317870283791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,9 +454,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 7487635317870283791}
+  - {fileID: 8739507449357653033}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8739507449357653033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371026020277530357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1864785514197961049
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +490,7 @@ GameObject:
   - component: {fileID: 1470054689350523621}
   - component: {fileID: 3143148446285471497}
   - component: {fileID: 8519908442236143601}
+  - component: {fileID: 3451755287945037938}
   m_Layer: 0
   m_Name: Bowling Pin 8
   m_TagString: Pin
@@ -588,7 +623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 4878810518334179512}
 --- !u!114 &3143148446285471497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,9 +659,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3143148446285471497}
+  - {fileID: 3451755287945037938}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &3451755287945037938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864785514197961049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &4120985325317042735
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +695,7 @@ GameObject:
   - component: {fileID: 985249878422920940}
   - component: {fileID: 1659534329741893924}
   - component: {fileID: 6450139725847118407}
+  - component: {fileID: 8279832488453407887}
   m_Layer: 0
   m_Name: Bowling Pin 5
   m_TagString: Pin
@@ -776,7 +828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 4614820066603317680}
 --- !u!114 &1659534329741893924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,9 +864,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1659534329741893924}
+  - {fileID: 8279832488453407887}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8279832488453407887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4120985325317042735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &4139927636756170993
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +900,7 @@ GameObject:
   - component: {fileID: 2641548816342199836}
   - component: {fileID: 869130305022010924}
   - component: {fileID: 1019623413243253413}
+  - component: {fileID: 29767643538480119}
   m_Layer: 0
   m_Name: Bowling Pin 3
   m_TagString: Pin
@@ -964,7 +1033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 1261801159526952605}
 --- !u!114 &869130305022010924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,9 +1069,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 869130305022010924}
+  - {fileID: 29767643538480119}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &29767643538480119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139927636756170993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &4165095713022927147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1105,7 @@ GameObject:
   - component: {fileID: 5638519468564124906}
   - component: {fileID: 2510159231690838575}
   - component: {fileID: 3282111977982210861}
+  - component: {fileID: 1736086983527716969}
   m_Layer: 0
   m_Name: Bowling Pin 1
   m_TagString: Pin
@@ -1152,7 +1238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 6981090527169080487}
 --- !u!114 &2510159231690838575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,9 +1274,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 2510159231690838575}
+  - {fileID: 1736086983527716969}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1736086983527716969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4165095713022927147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &5304531448639115976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,6 +1310,7 @@ GameObject:
   - component: {fileID: 4442788065077301010}
   - component: {fileID: 8802102087152654999}
   - component: {fileID: 7564502405126600569}
+  - component: {fileID: 118250612275762569}
   m_Layer: 0
   m_Name: Bowling Pin 7
   m_TagString: Pin
@@ -1340,7 +1443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 7753399358001922764}
 --- !u!114 &8802102087152654999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1377,9 +1479,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8802102087152654999}
+  - {fileID: 118250612275762569}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &118250612275762569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304531448639115976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &6221606912668046305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,6 +1515,7 @@ GameObject:
   - component: {fileID: 6043340114820074748}
   - component: {fileID: 1737421740260432131}
   - component: {fileID: 8883381561138459937}
+  - component: {fileID: 3072268994998493345}
   m_Layer: 0
   m_Name: Bowling Pin 10
   m_TagString: Pin
@@ -1528,7 +1648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 6536869737086658730}
 --- !u!114 &1737421740260432131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,9 +1684,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1737421740260432131}
+  - {fileID: 3072268994998493345}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &3072268994998493345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221606912668046305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &7213835099559224391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1720,7 @@ GameObject:
   - component: {fileID: 4588212320577530347}
   - component: {fileID: 4421529018558591065}
   - component: {fileID: 689863287084729412}
+  - component: {fileID: 1351855356601564112}
   m_Layer: 0
   m_Name: Bowling Pin 6
   m_TagString: Pin
@@ -1716,7 +1853,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 5383082969653277021}
 --- !u!114 &4421529018558591065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1753,9 +1889,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 4421529018558591065}
+  - {fileID: 1351855356601564112}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1351855356601564112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7213835099559224391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &9086104787077086769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,6 +1925,7 @@ GameObject:
   - component: {fileID: 6248290695727033656}
   - component: {fileID: 8826488050047608041}
   - component: {fileID: 6645743919741596580}
+  - component: {fileID: 2603795429251118100}
   m_Layer: 0
   m_Name: Bowling Pin 4
   m_TagString: Pin
@@ -1904,7 +2058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 3984732823825884316}
 --- !u!114 &8826488050047608041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1941,6 +2094,23 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8826488050047608041}
+  - {fileID: 2603795429251118100}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &2603795429251118100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086104787077086769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3

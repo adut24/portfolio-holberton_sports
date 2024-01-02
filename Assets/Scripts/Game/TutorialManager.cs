@@ -8,5 +8,9 @@ public class TutorialManager : MonoBehaviour
 	/// <summary>
 	/// Changes the way the player interacts with the objects according to their settings.
 	/// </summary>
-	public void CloseTutorial() => GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleMenuBehavior(GameManager.Instance.AccessibilityManager.ReducedMobilityMode);
+	public void CloseTutorial()
+	{
+		GameManager.Instance.PauseMenuManager.IsNotMainMenu = true;
+		GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleMenuBehavior(GameManager.Instance.AccessibilityManager.ReducedMobilityMode);
+	}
 }

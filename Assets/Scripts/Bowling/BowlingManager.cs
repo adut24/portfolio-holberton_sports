@@ -3,8 +3,6 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 
-using TMPro;
-
 using UnityEngine;
 
 /// <summary>
@@ -56,15 +54,10 @@ public class BowlingManager : MonoBehaviourPun
 	private int _remainingPins = 10;
 	private int _score;
 	private bool _isPlayerOne;
-	private bool _isStrike;
-	private bool _isSpare;
-	private bool _isSecondStrike;
 	private bool _canThrowLast;
-	private GameObject _scoreBoard;
+	private bool _pinsChecked;
+	private ScoreWriter _scoreBoard;
 	private GameObject _pins;
-	private TextMeshPro _currentScoreSlot;
-	private TextMeshPro _previousScoreSlot;
-	private TextMeshPro _twoStepsBackSlot;
 	private DataManager _dataManager;
 
 	/// <summary>
@@ -77,8 +70,9 @@ public class BowlingManager : MonoBehaviourPun
 		_isPlayerOne = PhotonNetwork.LocalPlayer.ActorNumber == 1;
 		_dataManager = GameManager.Instance.DataManager;
 
-		_scoreBoard = _isPlayerOne ? GameObject.Find("Screen Player 1") : GameObject.Find("Screen Player 2");
-		_scoreBoard.GetPhotonView().TransferOwnership(GameManager.Instance.Player.GetPhotonView().Owner);
+		GameObject scoreBoard = _isPlayerOne ? GameObject.Find("Screen Player 1") : GameObject.Find("Screen Player 2");
+		_scoreBoard = scoreBoard.GetComponent<ScoreWriter>();
+		scoreBoard.GetPhotonView().TransferOwnership(GameManager.Instance.Player.GetPhotonView().Owner);
 		_ballSpawnPoint = _isPlayerOne ? GameObject.Find("Ball Spawn Player 1").transform : GameObject.Find("Ball Spawn Player 2").transform;
 		_pinsSpawnPoint = _isPlayerOne ? GameObject.Find("Pins Spawn Player 1").transform : GameObject.Find("Pins Spawn Player 2").transform;
 		_pins = _isPlayerOne ? GameObject.FindWithTag("Pins1") : GameObject.FindWithTag("Pins2");
@@ -112,31 +106,27 @@ public class BowlingManager : MonoBehaviourPun
 		BallDestroyed = false;
 		yield return new WaitForSeconds(2f);
 
+		CheckPins();
+		while (!_pinsChecked)
+			yield return null;
+
 		PauseManager.enabled = false;
 		FadeScreen.FadeOut();
 		yield return new WaitForSeconds(FadeScreen.FadeDuration);
 
-		if (_currentScoreSlot == null)
-			_currentScoreSlot = _scoreBoard.transform.Find($"Turn {_round}/Final").GetComponent<TextMeshPro>();
+		_scoreBoard.SetCurrentSlot(_round);
 
 		_frameScores[_frame++] = ScoreFrame;
 		_remainingPins -= ScoreFrame;
 
 		CalculateScore();
-		ManageStrikeAndSpare();
+		_scoreBoard.ManageStrikeAndSpare(_throw, _score, _frame, ScoreFrame, _remainingPins, _round, _frameScores);
 
 		if (_round == 10 && _throw == 2 && _remainingPins == 0)
 			_canThrowLast = true;
 
-		WriteScore();
-
-		if ((_isStrike || _isSpare) && _round != 10)
-		{
-			if (_isSecondStrike)
-				_twoStepsBackSlot = _previousScoreSlot;
-			if (_previousScoreSlot == null || _isSecondStrike)
-				_previousScoreSlot = _currentScoreSlot;
-		}
+		_scoreBoard.WriteScore(_score.ToString(), _round, _throw, ScoreFrame, _remainingPins);
+		_scoreBoard.UpdateScoreSlots(_round);
 
 		if (_throw == 1)
 		{
@@ -150,9 +140,30 @@ public class BowlingManager : MonoBehaviourPun
 			ManagePins();
 
 		ScoreFrame = 0;
+		_pinsChecked = false;
 		FadeScreen.FadeIn();
 		yield return new WaitForSeconds(FadeScreen.FadeDuration);
 		PauseManager.enabled = true;
+	}
+
+	/// <summary>
+	/// Checks which pins are knocked over or not.
+	/// </summary>
+	private void CheckPins()
+	{
+		Transform pinsTransform = _pins.transform;
+		for (int i = 0; i < pinsTransform.childCount; i++)
+		{
+			Transform child = pinsTransform.GetChild(i);
+			GameObject pin = child.gameObject;
+			if (Mathf.Abs(child.position.y - Pins[pin].Item1.y) > 0.2f && pin.GetPhotonView().IsMine)
+			{
+				ScoreFrame++;
+				Pins.Remove(pin);
+				PhotonNetwork.Destroy(pin);
+			}
+		}
+		_pinsChecked = true;
 	}
 
 	/// <summary>
@@ -217,44 +228,7 @@ public class BowlingManager : MonoBehaviourPun
 		SetBall();
 	}
 
-	/// <summary>
-	/// Writes the score of the current frame, except if it was a spare or a strike.
-	/// </summary>
-	private void WriteScore()
-	{
-		photonView.RpcSecure("UpdateScoreOnClients", RpcTarget.AllBuffered, true, _score.ToString(), _round, _throw, ScoreFrame, _remainingPins);
-	}
 
-	[PunRPC]
-	private void UpdateScoreOnClients(string currentScore, int round, int throwNumber, int scoreFrame, int remainingPins)
-	{
-		TextMeshPro scoreSlot = _scoreBoard.transform.Find($"Turn {round}/Phase {_throw}").GetComponent<TextMeshPro>();
-
-		if (throwNumber == 1)
-		{
-			if (scoreFrame == 0)
-				scoreSlot.text = "-";
-			else if (scoreFrame == 10)
-				scoreSlot.text = "X";
-			else
-				scoreSlot.text = scoreFrame.ToString();
-		}
-		else
-		{
-			if (scoreFrame == 0)
-				scoreSlot.text = "-";
-			else if (remainingPins == 0 && round == 10 && _isStrike)
-				scoreSlot.text = "X";
-			else if (remainingPins == 0)
-				scoreSlot.text = "/";
-			else
-				scoreSlot.text = scoreFrame.ToString();
-
-			if (!_isStrike && !_isSpare || _throw == 3)
-				_currentScoreSlot.text = currentScore;
-		}
-	}
-	
 	/// <summary>
 	/// Destroys the remaining pins and instantiates a new set and a ball.
 	/// </summary>
@@ -272,8 +246,8 @@ public class BowlingManager : MonoBehaviourPun
 						PhotonNetwork.Destroy(kvp.Key);
 				}
 				PhotonNetwork.Destroy(_pins);
+				_pins = null;
 			}
-			_pins = null;
 			Pins.Clear();
 			_remainingPins = 10;
 			SetPins();
@@ -283,78 +257,10 @@ public class BowlingManager : MonoBehaviourPun
 		{
 			_round++;
 			_throw--;
-			_currentScoreSlot = null;
+			_scoreBoard.ResetCurrentSlot();
 		}
 		else if (_round == 10 && _throw == 2 && _canThrowLast)
 			_throw++;
-	}
-
-	/// <summary>
-	/// Manages scoring logic for strikes and spares in a bowling game.
-	/// </summary>
-	private void ManageStrikeAndSpare()
-	{
-		photonView.RpcSecure("ManagerStrikeAndSpareState", RpcTarget.AllBuffered, true, _throw, _score, _frame, ScoreFrame, _remainingPins, _frameScores);
-	}
-
-	[PunRPC]
-	private void ManagerStrikeAndSpareState(int throwNumber, int currentScore, int currentFrame, int scoreFrame, int remainingPins, int[] frameScores)
-	{
-		if (throwNumber == 1)
-		{
-			/*Checks if the previous throw was a spare or not */
-			if (_isSpare)
-			{
-				_previousScoreSlot.text = (currentScore - scoreFrame).ToString();
-				_previousScoreSlot = null;
-			}
-			/*Checks if the 2 previous throws were a strike or not */
-			if (_twoStepsBackSlot != null)
-			{
-				_twoStepsBackSlot.text = (currentScore - scoreFrame * 2 - frameScores[currentFrame - 2]).ToString();
-				_twoStepsBackSlot = null;
-			}
-		}
-		else
-		{
-			/* Checks if previous frame was a strike or not */
-			if (_isStrike && _previousScoreSlot != null)
-			{
-				_previousScoreSlot.text = (currentScore - scoreFrame - frameScores[currentFrame - 2]).ToString();
-				_previousScoreSlot = null;
-			}
-		}
-
-		if (remainingPins == 0)
-		{
-			if (throwNumber == 1)
-			{
-				/* Checks if it's the second strike in a row */
-				if (_isStrike)
-					_isSecondStrike = true;
-				_isStrike = true;
-				_isSpare = false;
-			}
-			else
-			{
-				if (_round == 10 && _isStrike)
-					_isStrike = true;
-				else
-				{
-					_isStrike = false;
-					_isSecondStrike = false;
-					_isSpare = true;
-				}
-			}
-		}
-		else
-		{
-			/* Resets all variables as not all pins were knocked down */
-			if (throwNumber == 2)
-				_isStrike = false;
-			_isSecondStrike = false;
-			_isSpare = false;
-		}
 	}
 
 	/// <summary>
@@ -365,8 +271,6 @@ public class BowlingManager : MonoBehaviourPun
 	{
 		FinalScore = _score;
 		ReplayMenu.SetActive(true);
-		GameManager.Instance.Player.GetComponent<InteractorManager>().ToggleMenuBehavior();
+		GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleMenuBehavior();
 	}
-
-	public void ResetState() => StopAllCoroutines();
 }

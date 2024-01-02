@@ -290,6 +290,92 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &19415703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 19415707}
+  - component: {fileID: 19415706}
+  - component: {fileID: 19415705}
+  m_Layer: 0
+  m_Name: MultiplayerScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &19415705
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19415703}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: c06fda9d4ba56e44ba3670f90a43a12c, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &19415706
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19415703}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &19415707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19415703}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 2871.3335, y: 319, z: -2257}
+  m_LocalScale: {x: 986.43585, y: 322.7826, z: 83.333336}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1223763567}
+  - {fileID: 2125040472}
+  - {fileID: 337088497}
+  m_Father: {fileID: 8096956142279173231}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!43 &28632034
 Mesh:
   m_ObjectHideFlags: 0
@@ -2339,6 +2425,7 @@ GameObject:
   - component: {fileID: 332197574}
   - component: {fileID: 332197575}
   - component: {fileID: 332197581}
+  - component: {fileID: 332197582}
   m_Layer: 0
   m_Name: Bowling Pin 8
   m_TagString: Untagged
@@ -2374,7 +2461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 332197577}
 --- !u!65 &332197576
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2508,9 +2595,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 332197574}
+  - {fileID: 332197582}
   sceneViewId: 991
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &332197582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332197573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &335062423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,6 +2631,7 @@ GameObject:
   - component: {fileID: 335062424}
   - component: {fileID: 335062425}
   - component: {fileID: 335062431}
+  - component: {fileID: 335062432}
   m_Layer: 0
   m_Name: Bowling Pin 1
   m_TagString: Untagged
@@ -2562,7 +2667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 335062427}
 --- !u!65 &335062426
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2696,9 +2801,198 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 335062424}
+  - {fileID: 335062432}
   sceneViewId: 998
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &335062432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335062423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
+--- !u!1 &337088496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 337088497}
+  - component: {fileID: 337088499}
+  - component: {fileID: 337088498}
+  m_Layer: 0
+  m_Name: HistoryTitle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &337088497
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337088496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.04}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 19415707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.28842, y: 0.025}
+  m_SizeDelta: {x: 3.68027, y: 1.7673}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &337088498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337088496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'History:'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 193cd64d62ea7294b9c338644de376b2, type: 2}
+  m_sharedMaterial: {fileID: -8708424068392097215, guid: 193cd64d62ea7294b9c338644de376b2,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 9.3
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 3
+  m_fontSizeMax: 10
+  m_fontStyle: 4
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 337088499}
+  m_maskType: 0
+--- !u!23 &337088499
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337088496}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -8708424068392097215, guid: 193cd64d62ea7294b9c338644de376b2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!43 &338333281
 Mesh:
   m_ObjectHideFlags: 0
@@ -3096,6 +3390,7 @@ GameObject:
   - component: {fileID: 427342454}
   - component: {fileID: 427342455}
   - component: {fileID: 427342461}
+  - component: {fileID: 427342462}
   m_Layer: 0
   m_Name: Bowling Pin 3
   m_TagString: Untagged
@@ -3131,7 +3426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 427342457}
 --- !u!65 &427342456
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3265,9 +3560,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 427342454}
+  - {fileID: 427342462}
   sceneViewId: 996
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &427342462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427342453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!43 &432064835
 Mesh:
   m_ObjectHideFlags: 0
@@ -6046,6 +6358,7 @@ GameObject:
   - component: {fileID: 806609163}
   - component: {fileID: 806609164}
   - component: {fileID: 806609170}
+  - component: {fileID: 806609171}
   m_Layer: 0
   m_Name: Bowling Pin 9
   m_TagString: Untagged
@@ -6081,7 +6394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 806609166}
 --- !u!65 &806609165
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6215,9 +6528,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 806609163}
+  - {fileID: 806609171}
   sceneViewId: 990
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &806609171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806609162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!43 &811954340
 Mesh:
   m_ObjectHideFlags: 0
@@ -6399,6 +6729,7 @@ GameObject:
   - component: {fileID: 815599575}
   - component: {fileID: 815599576}
   - component: {fileID: 815599582}
+  - component: {fileID: 815599583}
   m_Layer: 0
   m_Name: Bowling Pin 4
   m_TagString: Untagged
@@ -6434,7 +6765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 815599578}
 --- !u!65 &815599577
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6568,9 +6899,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 815599575}
+  - {fileID: 815599583}
   sceneViewId: 995
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &815599583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815599574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!43 &823239484
 Mesh:
   m_ObjectHideFlags: 0
@@ -7083,6 +7431,7 @@ GameObject:
   - component: {fileID: 935084007}
   - component: {fileID: 935084008}
   - component: {fileID: 935084014}
+  - component: {fileID: 935084015}
   m_Layer: 0
   m_Name: Bowling Pin 10
   m_TagString: Untagged
@@ -7118,7 +7467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 935084010}
 --- !u!65 &935084009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7252,9 +7601,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 935084007}
+  - {fileID: 935084015}
   sceneViewId: 989
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &935084015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935084006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &949325836
 GameObject:
   m_ObjectHideFlags: 0
@@ -7798,6 +8164,7 @@ GameObject:
   - component: {fileID: 1030920160}
   - component: {fileID: 1030920161}
   - component: {fileID: 1030920167}
+  - component: {fileID: 1030920168}
   m_Layer: 0
   m_Name: Bowling Pin 7
   m_TagString: Untagged
@@ -7833,7 +8200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 1030920163}
 --- !u!65 &1030920162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7967,9 +8334,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1030920160}
+  - {fileID: 1030920168}
   sceneViewId: 992
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1030920168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030920159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1033640600
 GameObject:
   m_ObjectHideFlags: 0
@@ -8059,37 +8443,37 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 8096956142279173231}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 166.66667
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.854
+      value: 2821.1667
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.194
+      value: 182.83334
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.283
+      value: -1353.3334
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
@@ -8099,7 +8483,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
@@ -8109,7 +8493,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
         type: 3}
@@ -8141,6 +8525,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2639edf29cfbb44d8deb82938595a59, type: 3}
+--- !u!4 &1065997044 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a2639edf29cfbb44d8deb82938595a59,
+    type: 3}
+  m_PrefabInstance: {fileID: 1065997043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1090112754
 Mesh:
   m_ObjectHideFlags: 0
@@ -8405,6 +8795,7 @@ GameObject:
   - component: {fileID: 1146317664}
   - component: {fileID: 1146317665}
   - component: {fileID: 1146317671}
+  - component: {fileID: 1146317672}
   m_Layer: 0
   m_Name: Bowling Pin 5
   m_TagString: Untagged
@@ -8440,7 +8831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 1146317667}
 --- !u!65 &1146317666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8574,9 +8965,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1146317664}
+  - {fileID: 1146317672}
   sceneViewId: 994
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1146317672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146317663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!43 &1153950123
 Mesh:
   m_ObjectHideFlags: 0
@@ -9356,6 +9764,178 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221662599}
   m_Mesh: {fileID: -8528435136185144170, guid: 6aca1e15f9e3d4943baefa6a738d34f1, type: 3}
+--- !u!1 &1223763566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1223763567}
+  - component: {fileID: 1223763569}
+  - component: {fileID: 1223763568}
+  m_Layer: 0
+  m_Name: CodeTitle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1223763567
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223763566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.04}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 19415707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.28842, y: 0.385}
+  m_SizeDelta: {x: 3.68027, y: 1.7673}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1223763568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223763566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Code:'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 193cd64d62ea7294b9c338644de376b2, type: 2}
+  m_sharedMaterial: {fileID: -8708424068392097215, guid: 193cd64d62ea7294b9c338644de376b2,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 10
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 5
+  m_fontSizeMax: 10
+  m_fontStyle: 4
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1223763569}
+  m_maskType: 0
+--- !u!23 &1223763569
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223763566}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -8708424068392097215, guid: 193cd64d62ea7294b9c338644de376b2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1243934360
 GameObject:
   m_ObjectHideFlags: 0
@@ -9868,6 +10448,7 @@ GameObject:
   - component: {fileID: 1286481615}
   - component: {fileID: 1286481616}
   - component: {fileID: 1286481622}
+  - component: {fileID: 1286481623}
   m_Layer: 0
   m_Name: Bowling Pin 2
   m_TagString: Untagged
@@ -9903,7 +10484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 1286481618}
 --- !u!65 &1286481617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10037,9 +10618,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1286481615}
+  - {fileID: 1286481623}
   sceneViewId: 997
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1286481623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286481614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1290598204
 GameObject:
   m_ObjectHideFlags: 0
@@ -13634,6 +14232,7 @@ GameObject:
   - component: {fileID: 1810353305}
   - component: {fileID: 1810353306}
   - component: {fileID: 1810353312}
+  - component: {fileID: 1810353313}
   m_Layer: 0
   m_Name: Bowling Pin 6
   m_TagString: Untagged
@@ -13669,7 +14268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 1810353308}
 --- !u!65 &1810353307
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13803,9 +14402,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1810353305}
+  - {fileID: 1810353313}
   sceneViewId: 993
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1810353313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810353304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1829572827
 GameObject:
   m_ObjectHideFlags: 0
@@ -15347,8 +15963,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.4121556, y: 0.08808987, z: 4.3338437}
-  m_Center: {x: 5.1453, y: -0.7012902, z: -1.3088645}
+  m_Size: {x: 3.4121556, y: 0.011688833, z: 4.3338437}
+  m_Center: {x: 5.1453, y: -0.73949033, z: -1.3088645}
 --- !u!114 &2025750405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15510,8 +16126,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.934588, y: 0.08808987, z: 4.3338437}
-  m_Center: {x: 4.906518, y: -0.7012902, z: -1.3088645}
+  m_Size: {x: 2.934588, y: 0.008771166, z: 4.3338437}
+  m_Center: {x: 4.906518, y: -0.74094933, z: -1.3088645}
 --- !u!1 &2109695973
 GameObject:
   m_ObjectHideFlags: 0
@@ -15708,6 +16324,178 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2125040471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2125040472}
+  - component: {fileID: 2125040474}
+  - component: {fileID: 2125040473}
+  m_Layer: 0
+  m_Name: CodeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2125040472
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125040471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.04}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 19415707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.1711, y: 0.3684}
+  m_SizeDelta: {x: 6.23914, y: 2.4189}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2125040473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125040471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 4c6091b71f3133f4e90770c6856303bb, type: 2}
+  m_sharedMaterial: {fileID: -2154672724708335580, guid: 4c6091b71f3133f4e90770c6856303bb,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 5
+  m_fontSizeMax: 75
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 0
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 2125040474}
+  m_maskType: 0
+--- !u!23 &2125040474
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125040471}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -2154672724708335580, guid: 4c6091b71f3133f4e90770c6856303bb, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2143383495
 GameObject:
   m_ObjectHideFlags: 0
@@ -16209,7 +16997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 6965161511428150347}
 --- !u!4 &97690475770094629
 Transform:
   m_ObjectHideFlags: 0
@@ -16257,6 +17045,7 @@ GameObject:
   - component: {fileID: 5762685335760628180}
   - component: {fileID: 305090052095409195}
   - component: {fileID: 7951390335719568867}
+  - component: {fileID: 7951390335719568868}
   m_Layer: 0
   m_Name: Bowling Pin 10
   m_TagString: Untagged
@@ -17102,7 +17891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 959834608404519037}
 --- !u!1 &307402225298937460
 GameObject:
   m_ObjectHideFlags: 0
@@ -22284,7 +23073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 3964421945006431344}
 --- !u!1 &1848124610713994134
 GameObject:
   m_ObjectHideFlags: 0
@@ -22548,7 +23337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1934032236247554716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22904,6 +23693,7 @@ GameObject:
   - component: {fileID: 3297476257749117504}
   - component: {fileID: 7656770471699546053}
   - component: {fileID: 7656770471699546054}
+  - component: {fileID: 7656770471699546055}
   m_Layer: 0
   m_Name: Bowling Pin 7
   m_TagString: Untagged
@@ -26282,6 +27072,7 @@ GameObject:
   - component: {fileID: 3285472702744204350}
   - component: {fileID: 95639170481839599}
   - component: {fileID: 8842547071006934644}
+  - component: {fileID: 8842547071006934645}
   m_Layer: 0
   m_Name: Bowling Pin 4
   m_TagString: Untagged
@@ -28327,6 +29118,7 @@ GameObject:
   - component: {fileID: 1333577649131095698}
   - component: {fileID: 2534982102833184184}
   - component: {fileID: 8066419006056698426}
+  - component: {fileID: 8066419006056698427}
   m_Layer: 0
   m_Name: Screen Player 1
   m_TagString: Untagged
@@ -28953,6 +29745,7 @@ GameObject:
   - component: {fileID: 7690399040807813262}
   - component: {fileID: 7514606525462534460}
   - component: {fileID: 7690399040807813263}
+  - component: {fileID: 7690399040807813264}
   m_Layer: 0
   m_Name: Bowling Pin 6
   m_TagString: Untagged
@@ -29703,6 +30496,7 @@ GameObject:
   - component: {fileID: 6861264446745646292}
   - component: {fileID: 6107204063218238091}
   - component: {fileID: 6861264446745646293}
+  - component: {fileID: 6861264446745646294}
   m_Layer: 0
   m_Name: Screen Player 2
   m_TagString: Untagged
@@ -32040,7 +32834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 997386591498308371}
 --- !u!23 &4217034679347117743
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -33416,8 +34210,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921828890845060339}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.938491, z: -0, w: 0.34530374}
-  m_LocalPosition: {x: 2739, y: 0, z: 1143}
+  m_LocalRotation: {x: -0, y: 0.9913128, z: -0, w: 0.1315256}
+  m_LocalPosition: {x: 3714, y: 0, z: -1224}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33430,7 +34224,7 @@ Transform:
   - {fileID: 2197512447744326590}
   - {fileID: 8897726483418855869}
   m_Father: {fileID: 8096956142279173231}
-  m_LocalEulerAnglesHint: {x: 0, y: 139.599, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 164.884, z: 0}
 --- !u!224 &4717348103082859192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33843,7 +34637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 1463846113426634863}
 --- !u!1 &4867333654710170352
 GameObject:
   m_ObjectHideFlags: 0
@@ -34159,6 +34953,7 @@ GameObject:
   - component: {fileID: 3462362938123042008}
   - component: {fileID: 4199049688040925209}
   - component: {fileID: 4963944251834195491}
+  - component: {fileID: 4963944251834195492}
   m_Layer: 0
   m_Name: Bowling Pin 2
   m_TagString: Untagged
@@ -34186,9 +34981,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3462362938123042008}
+  - {fileID: 4963944251834195492}
   sceneViewId: 986
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4963944251834195492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963944251834195490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!23 &4973716435180086774
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34415,6 +35227,7 @@ GameObject:
   - component: {fileID: 5683868091589866353}
   - component: {fileID: 5927718389411776655}
   - component: {fileID: 5927718389411776656}
+  - component: {fileID: 5927718389411776657}
   m_Layer: 0
   m_Name: Bowling Pin 9
   m_TagString: Untagged
@@ -36519,6 +37332,7 @@ GameObject:
   - component: {fileID: 8969781508956254174}
   - component: {fileID: 4864744024579009074}
   - component: {fileID: 8969781508956254175}
+  - component: {fileID: 8969781508956254176}
   m_Layer: 0
   m_Name: Bowling Pin 8
   m_TagString: Untagged
@@ -37549,7 +38363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 376197396232117964}
 --- !u!114 &5927718389411776656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37570,9 +38384,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5683868091589866353}
+  - {fileID: 5927718389411776657}
   sceneViewId: 979
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &5927718389411776657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019388207644186252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!65 &5930442932270888768
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39289,7 +40120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 1724463589615651175}
 --- !u!23 &6517536193980760349
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40129,6 +40960,18 @@ MonoBehaviour:
   sceneViewId: 800
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6861264446745646294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4000402149311705559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92dbd17027577ed46b16efba757e2322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6865148801350311275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41941,7 +42784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5436044780743286114}
   m_Layer: 0
-  m_Name: Screen
+  m_Name: Screens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42448,7 +43291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 2112515232667369866}
 --- !u!23 &7523511483599115935
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -43938,7 +44781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 4358428611585028635}
 --- !u!114 &7656770471699546054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43959,9 +44802,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3297476257749117504}
+  - {fileID: 7656770471699546055}
   sceneViewId: 981
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7656770471699546055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2195750174978679327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!4 &7660577991698524754
 Transform:
   m_ObjectHideFlags: 0
@@ -44032,9 +44892,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 7690399040807813262}
+  - {fileID: 7690399040807813264}
   sceneViewId: 982
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7690399040807813264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745047468088628368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &7694824645118011125
 GameObject:
   m_ObjectHideFlags: 0
@@ -45865,6 +46742,7 @@ GameObject:
   - component: {fileID: 8444324739828638456}
   - component: {fileID: 1848076241928545341}
   - component: {fileID: 8444324739828638457}
+  - component: {fileID: 8444324739828638458}
   m_Layer: 0
   m_Name: Bowling Pin 1
   m_TagString: Untagged
@@ -46000,9 +46878,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5762685335760628180}
+  - {fileID: 7951390335719568868}
   sceneViewId: 978
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7951390335719568868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122215802579411766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &7968660329904371750
 GameObject:
   m_ObjectHideFlags: 0
@@ -46019,6 +46914,7 @@ GameObject:
   - component: {fileID: 6623213342733620987}
   - component: {fileID: 8308313100364340939}
   - component: {fileID: 8393276029193596675}
+  - component: {fileID: 8393276029193596676}
   m_Layer: 0
   m_Name: Bowling Pin 3
   m_TagString: Untagged
@@ -46110,6 +47006,7 @@ GameObject:
   - component: {fileID: 4675437591783936499}
   - component: {fileID: 6505990151854616123}
   - component: {fileID: 7986300819555238649}
+  - component: {fileID: 7986300819555238650}
   m_Layer: 0
   m_Name: Bowling Pin 5
   m_TagString: Untagged
@@ -46137,9 +47034,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 4675437591783936499}
+  - {fileID: 7986300819555238650}
   sceneViewId: 983
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7986300819555238650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986300819555238648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!33 &7988606028085753652
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -46719,6 +47633,18 @@ MonoBehaviour:
   sceneViewId: 900
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8066419006056698427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559468032088484566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92dbd17027577ed46b16efba757e2322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8067145114364485060
 Transform:
   m_ObjectHideFlags: 0
@@ -46823,6 +47749,8 @@ Transform:
   - {fileID: 5449113806218190102}
   - {fileID: 2025750403}
   - {fileID: 2055793061}
+  - {fileID: 1065997044}
+  - {fileID: 19415707}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &8099346278976504025
@@ -51987,7 +52915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed9e4485706a244a04468e7117ab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 5073152568249114186}
 --- !u!1 &8317667767898455403
 GameObject:
   m_ObjectHideFlags: 0
@@ -52333,9 +53261,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6623213342733620987}
+  - {fileID: 8393276029193596676}
   sceneViewId: 985
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8393276029193596676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968660329904371750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!4 &8393910706628630325
 Transform:
   m_ObjectHideFlags: 0
@@ -52888,9 +53833,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8444324739828638456}
+  - {fileID: 8444324739828638458}
   sceneViewId: 987
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8444324739828638458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937805871674102268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!23 &8447362166283678993
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58229,9 +59191,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3285472702744204350}
+  - {fileID: 8842547071006934645}
   sceneViewId: 984
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8842547071006934645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3025838613925088998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!4 &8847471292202057940
 Transform:
   m_ObjectHideFlags: 0
@@ -58447,9 +59426,26 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8969781508956254174}
+  - {fileID: 8969781508956254176}
   sceneViewId: 980
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8969781508956254176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621803582015584654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!4 &8974131810651184693
 Transform:
   m_ObjectHideFlags: 0
@@ -59465,5 +60461,4 @@ SceneRoots:
   - {fileID: 1652110472}
   - {fileID: 406155675}
   - {fileID: 2012016501}
-  - {fileID: 1065997043}
   - {fileID: 270951525727013557}

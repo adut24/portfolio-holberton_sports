@@ -1,12 +1,24 @@
 using System.IO;
+
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public AudioMixer AudioMixer { get; set; }
+
+	/// <summary>
+	/// 
+	/// </summary>
 	public Slider BGMSlider { get; set; }
+
+	/// <summary>
+	/// 
+	/// </summary>
 	public Slider SFXSldier { get; set; }
 
 	[SerializeField] private AudioMixer _mixer;
@@ -15,6 +27,9 @@ public class SoundManager : MonoBehaviour
 
 	private string _filePath;
 
+	/// <summary>
+	/// 
+	/// </summary>
 	private void Awake()
 	{
 		AudioMixer = _mixer;
