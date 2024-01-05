@@ -15,6 +15,7 @@ public class Ball : MonoBehaviourPun
 	/// </summary>
 	public BowlingManager BowlingManager { get; set; }
 
+	[SerializeField] private Rigidbody _rb;
 	[SerializeField] private XRGrabInteractable _grabComponent;
 	[SerializeField] private Renderer _renderer;
 	[SerializeField] private AudioSource _audioSource;
@@ -37,7 +38,7 @@ public class Ball : MonoBehaviourPun
 			Color.magenta
 		};
 		Color color = colors[Random.Range(0, colors.Length)];
-		photonView.RpcSecure("RPC_SetColor", RpcTarget.AllBuffered, true, new Vector3(color.r, color.g, color.b));
+		photonView.RpcSecure("SetColor", RpcTarget.AllBuffered, true, new Vector3(color.r, color.g, color.b));
 		_grabComponent.selectEntered.AddListener(OnGrab);
 		_grabComponent.selectExited.AddListener(OnRelease);
 	}
@@ -47,7 +48,7 @@ public class Ball : MonoBehaviourPun
 	/// </summary>
 	/// <param name="color">The RGB color representation as a Vector3, in RGB order.</param>
 	[PunRPC]
-	void RPC_SetColor(Vector3 color) => _renderer.material.SetColor("_BaseColor", new Color(color.x, color.y, color.z, 1.0f));
+	private void SetColor(Vector3 color) => _renderer.material.SetColor("_BaseColor", new Color(color.x, color.y, color.z, 1.0f));
 
 
 	/// <summary>
@@ -66,6 +67,7 @@ public class Ball : MonoBehaviourPun
 	/// <param name="args">The data associated with this event.</param>
 	private void OnGrab(SelectEnterEventArgs args)
 	{
+		photonView.RpcSecure("ChangeRigidbody", RpcTarget.All, true, false);
 		PhotonView playerView = args.interactorObject.transform.gameObject.GetComponentInParent<PhotonView>();
 		if (playerView != null)
 			photonView.TransferOwnership(playerView.OwnerActorNr);
@@ -87,6 +89,7 @@ public class Ball : MonoBehaviourPun
 	{
 		yield return new WaitForSeconds(0.1f);
 		_grabComponent.enabled = false;
+		photonView.RpcSecure("ChangeRigidbody", RpcTarget.All, true, true);
 		yield return new WaitForSeconds(15f);
 		if (photonView.IsMine)
 		{
@@ -94,6 +97,25 @@ public class Ball : MonoBehaviourPun
 				BowlingManager = GameManager.Instance.BowlingManager;
 			PhotonNetwork.Destroy(gameObject);
 			BowlingManager.BallDestroyed = true;
+		}
+	}
+
+	/// <summary>
+	/// Changes the behaviour of the rigidbody depending on if the ball is grabbed or not.
+	/// </summary>
+	/// <param name="useGravity">Tells if the rigidbody should submit to gravity or not</param>
+	[PunRPC]
+	private void ChangeRigidbody(bool useGravity)
+	{
+		if (!useGravity)
+		{
+			_rb.useGravity = false;
+			_rb.isKinematic = true;
+		}
+		else
+		{
+			_rb.useGravity = true;
+			_rb.isKinematic = false;
 		}
 	}
 }

@@ -16,11 +16,6 @@ public class BowlingManager : MonoBehaviourPun
 	public Dictionary<GameObject, (Vector3, Quaternion)> Pins { get; set; }
 
 	/// <summary>
-	/// Gets or sets the score at the end of the game.
-	/// </summary>
-	public int FinalScore { get; private set; }
-
-	/// <summary>
 	/// Gets or sets the score of the current frame.
 	/// </summary>
 	public int ScoreFrame { get; set; }
@@ -84,8 +79,8 @@ public class BowlingManager : MonoBehaviourPun
 			Pins.Add(pin.gameObject, (pin.position, pin.rotation));
 			pin.GetComponent<Pin>().enabled = true;
 		}
-
-		SetBall();
+		if (PhotonNetwork.OfflineMode)
+			SetBall();
 	}
 
 	/// <summary>
@@ -156,7 +151,7 @@ public class BowlingManager : MonoBehaviourPun
 		{
 			Transform child = pinsTransform.GetChild(i);
 			GameObject pin = child.gameObject;
-			if (Mathf.Abs(child.position.y - Pins[pin].Item1.y) > 0.2f && pin.GetPhotonView().IsMine)
+			if (Mathf.Abs(child.position.y - Pins[pin].Item1.y) > 0.1f && pin.GetPhotonView().IsMine)
 			{
 				ScoreFrame++;
 				Pins.Remove(pin);
@@ -200,7 +195,7 @@ public class BowlingManager : MonoBehaviourPun
 	/// <summary>
 	/// Instantiates a new bowling ball.
 	/// </summary>
-	private void SetBall() => PhotonNetwork.Instantiate("BowlingBall", _ballSpawnPoint.position, _ballSpawnPoint.rotation);
+	public void SetBall() => PhotonNetwork.Instantiate("BowlingBall", _ballSpawnPoint.position, _ballSpawnPoint.rotation);
 
 	/// <summary>
 	/// Instantiates a new set of pins.
@@ -269,8 +264,13 @@ public class BowlingManager : MonoBehaviourPun
 	/// </summary>
 	private void FinishGame()
 	{
-		FinalScore = _score;
+		DataManager dataManager = GameManager.Instance.DataManager;
+		if (_score > dataManager.HighScores["Bowling"])
+		{
+			dataManager.HighScores["Bowling"] = _score;
+			dataManager.SaveData();
+		}
 		ReplayMenu.SetActive(true);
-		GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleMenuBehavior();
+		GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleBehavior();
 	}
 }

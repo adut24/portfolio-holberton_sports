@@ -50,7 +50,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 	private GameManager _gameManager;
 	private GameObject _player;
-	private GameObject _multiplayerScreen;
+	private Transform _multipurposeScreen;
+	private bool _isPlayerOne;
 
 	/// <summary>
 	/// 
@@ -104,6 +105,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 			ErrorCode.GameDoesNotExist => "No opened room with this ID was found",
 			ErrorCode.GameFull => "This room is full",
 			ErrorCode.GameClosed => "This room was closed",
+			ErrorCode.JoinFailedFoundActiveJoiner => "This user is already in",
 			_ => "An error occured",
 		};
 	}
@@ -149,7 +151,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 	/// <param name="newPlayer"></param>
 	public override void OnPlayerEnteredRoom(Player newPlayer)
 	{
-		Debug.Log(newPlayer);
+		if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+		{
+			_gameManager.BowlingManager.SetBall();
+			TextMeshPro historyBetweenPlayers = _multipurposeScreen.transform.Find("HistoryText").GetComponent<TextMeshPro>();
+			DataManager dataManager = _gameManager.DataManager;
+			string id = PhotonNetwork.PlayerListOthers[0].UserId;
+			if (dataManager.MatchHistory.ContainsKey(id))
+			{
+				(int, int) scores = dataManager.MatchHistory[id];
+				historyBetweenPlayers.text = $"P1 - P2: {(_isPlayerOne ? scores.Item1 : scores.Item2)} - {(_isPlayerOne ? scores.Item2 : scores.Item1)}";
+			}
+			else
+				historyBetweenPlayers.text = "P1 - P2: 0 - 0";
+		}
 	}
 
 	/// <summary>
@@ -198,9 +213,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 	/// <returns></returns>
 	public IEnumerator LoadPlayer()
 	{
-		bool isPlayerOne = PhotonNetwork.LocalPlayer.ActorNumber == 1;
-
-		if (isPlayerOne)
+		Debug.Log("Actor number : " + PhotonNetwork.LocalPlayer.ActorNumber);
+		_isPlayerOne = PhotonNetwork.LocalPlayer.ActorNumber == 1;
+		if (_isPlayerOne)
 		{
 			yield return StartCoroutine(FadeScreen());
 			PhotonNetwork.LoadLevel(Sport);
@@ -208,7 +223,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 				yield return null;
 		}
 
-		Transform spawnPoint = isPlayerOne ? GameObject.Find("Spawn Point Player 1").transform : GameObject.Find("Spawn Point Player 2").transform;
+		Transform spawnPoint = _isPlayerOne ? GameObject.Find("Spawn Point Player 1").transform : GameObject.Find("Spawn Point Player 2").transform;
 		_player = PhotonNetwork.Instantiate(_playerPrefab.name, spawnPoint.position, spawnPoint.rotation, 0);
 		GameManager.Instance.Player = _player;
 
@@ -240,11 +255,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 		if (tutorial != null)
 			tutorial.transform.SetParent(_player.transform, false);
 
-		_multiplayerScreen = GameObject.Find("MultiplayerScreen");
-		if (PhotonNetwork.OfflineMode)
-			Destroy(_multiplayerScreen);
-		else
-			_multiplayerScreen.transform.Find("CodeText").GetComponent<TextMeshPro>().text = RoomCode;
+		if (Sport.Equals("Bowling") || Sport.Equals("Archery"))
+		{
+			_multipurposeScreen = GameObject.Find("MultipurposeScreen").transform;
+			if (PhotonNetwork.OfflineMode)
+			{
+				_multipurposeScreen.Find("CodeTitle").GetComponent<TextMeshPro>().text = string.Empty;
+				_multipurposeScreen.Find("HistoryTitle").GetComponent<TextMeshPro>().text = "Record:";
+				_multipurposeScreen.Find("HistoryText").GetComponent<TextMeshPro>().text = GameManager.Instance.DataManager.HighScores[Sport].ToString();
+			}
+			else
+				_multipurposeScreen.Find("CodeText").GetComponent<TextMeshPro>().text = RoomCode;
+		}
 
 		PrepareGameManager(fadeScreenManager);
 		fadeScreenManager.FadeIn();
@@ -279,7 +301,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 	/// <summary>
 	/// Connects to the Photon servers.
 	/// </summary>
-	public void ConnectToServer() => PhotonNetwork.ConnectUsingSettings();
+	public void ConnectToServer()
+	{
+		//PhotonNetwork.AuthValues = new AuthenticationValues { UserId = GameManager.Instance.DataManager.UserID };
+		PhotonNetwork.AuthValues = new AuthenticationValues { UserId = System.Guid.NewGuid().ToString() };
+		PhotonNetwork.ConnectUsingSettings();
+	}
 
 	/// <summary>
 	/// Indicates that the game will be played locally only.

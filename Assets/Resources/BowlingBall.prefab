@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79db0ba29dff05840a75aeeada1f27ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 4437453763478912118}
   _grabComponent: {fileID: 3953783723440042343}
   _renderer: {fileID: 6039686563050203436}
   _audioSource: {fileID: -5157070637166727193}

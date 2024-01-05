@@ -11,6 +11,6 @@ public class TutorialManager : MonoBehaviour
 	public void CloseTutorial()
 	{
 		GameManager.Instance.PauseMenuManager.IsNotMainMenu = true;
-		GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleMenuBehavior(GameManager.Instance.AccessibilityManager.ReducedMobilityMode);
+		GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleBehavior(GameManager.Instance.AccessibilityManager.ReducedMobilityMode);
 	}
 }

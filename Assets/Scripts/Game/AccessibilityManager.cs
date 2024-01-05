@@ -10,16 +10,6 @@ using UnityEngine.UI;
 public class AccessibilityManager : MonoBehaviour
 {
 	/// <summary>
-	/// Gets or sets the toggle for the option of "reduced mobility mode".
-	/// </summary>
-	public Toggle ReducedMobilityToggle { get; set; }
-
-	/// <summary>
-	/// Gets or sets the toggle for the option of "one-handed mode".
-	/// </summary>
-	public Toggle OneHandedToggle { get; set; }
-
-	/// <summary>
 	/// Gets or sets the option of reduced mobility. If activated, it gives a "laser" to the player to grab the interactable objects from afar.
 	/// </summary>
 	public bool ReducedMobilityMode { get; set; }
@@ -39,8 +29,6 @@ public class AccessibilityManager : MonoBehaviour
 	/// </summary>
 	private void Awake()
 	{
-		ReducedMobilityToggle = _reducedMobility;
-		OneHandedToggle = _oneHanded;
 		_filePath = Path.Combine(Application.persistentDataPath, "accessilibity.json");
 		LoadSettings();
 	}
@@ -69,8 +57,8 @@ public class AccessibilityManager : MonoBehaviour
 			ReducedMobilityMode = accessibilitySettings.hasReducedMobility;
 			OneHandedMode = accessibilitySettings.isOneHanded;
 		}
-		ReducedMobilityToggle.isOn = ReducedMobilityMode;
-		OneHandedToggle.isOn = OneHandedMode;
+		_reducedMobility.isOn = ReducedMobilityMode;
+		_oneHanded.isOn = OneHandedMode;
 	}
 }
 
