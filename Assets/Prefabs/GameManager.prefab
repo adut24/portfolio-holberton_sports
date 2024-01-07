@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8936886365723003011}
   - component: {fileID: 997359592414798826}
   - component: {fileID: 6919691446843287942}
-  - component: {fileID: 5419125908603325929}
   - component: {fileID: 8592924267437590481}
   m_Layer: 0
   m_Name: GameManager
@@ -52,13 +51,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _version: {fileID: 0}
-  _fadeScreenManager: {fileID: 0}
   _soundManager: {fileID: 6164844864126170698}
   _accessibilityManager: {fileID: 8936886365723003011}
   _pauseMenuManager: {fileID: 9147791981034145824}
   _networkManager: {fileID: 997359592414798826}
   _dataManager: {fileID: 6919691446843287942}
-  _tutorialManager: {fileID: 5419125908603325929}
+  _tutorialManager: {fileID: 0}
+  _codeSlot: {fileID: 0}
 --- !u!114 &9147791981034145824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,13 +122,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 4225181596040617389, guid: e2d82c43e8b091b40a7ccd3308477f47,
     type: 3}
-  _player: {fileID: 0}
-  _roomListContent: {fileID: 0}
   _roomButtonPrefab: {fileID: 5645925770201991013, guid: 10ef5730803678f40af8388e7d4195d2,
     type: 3}
-  _roomText: {fileID: 0}
-  _roomButton: {fileID: 2300054474024109162, guid: 10ef5730803678f40af8388e7d4195d2,
-    type: 3}
+  _errorMenu: {fileID: 0}
+  _roomMenu: {fileID: 0}
+  _errorConnectText: {fileID: 0}
+  _errorJoinText: {fileID: 0}
+  _roomListContent: {fileID: 0}
+  _menuFadeManager: {fileID: 0}
 --- !u!114 &6919691446843287942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,18 +140,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3103872dec2c30d4bb16906f924c0c81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5419125908603325929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7939479365913790822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f7f6900bb449a48b8102d194aa9457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8592924267437590481

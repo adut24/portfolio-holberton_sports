@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Responsible for managing the interaction method for the player.
+/// </summary>
 public class InteractorManager : MonoBehaviour
 {
 	[SerializeField] private GameObject _leftDirectController;
@@ -7,11 +10,15 @@ public class InteractorManager : MonoBehaviour
 	[SerializeField] private GameObject _leftRayController;
 	[SerializeField] private GameObject _rightRayController;
 
-	public void ToggleMenuBehavior(bool menuBehavior = true)
+	/// <summary>
+	/// Toggles the interaction behavior between direct and ray-based methods.
+	/// </summary>
+	/// <param name="rayBehavior">If true, activates ray-based interaction; otherwise, activates direct interaction.</param>
+	public void ToggleBehavior(bool rayBehavior = true)
 	{
-		_leftDirectController.SetActive(!menuBehavior);
-		_rightDirectController.SetActive(!menuBehavior);
-		_leftRayController.SetActive(menuBehavior);
-		_rightRayController.SetActive(menuBehavior);
+		_leftDirectController.SetActive(!rayBehavior);
+		_rightDirectController.SetActive(!rayBehavior);
+		_leftRayController.SetActive(rayBehavior);
+		_rightRayController.SetActive(rayBehavior);
 	}
 }

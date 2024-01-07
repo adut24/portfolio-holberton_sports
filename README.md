@@ -18,6 +18,8 @@ Coming soon.
 Coming soon
 
 ## Credits
+### Menu
+<a href="https://www.vecteezy.com/free-vector/stream-overlay">Stream Overlay Vectors by Vecteezy</a>
 ### Bowling
 #### Models
 - "Bowling Pack (Bowling Pins & Ball)" (https://skfb.ly/oHTtQ) by EverZax is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).

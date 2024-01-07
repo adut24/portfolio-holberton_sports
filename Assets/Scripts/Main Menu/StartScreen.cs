@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Responsible for managing the first screen of the game.
+/// </summary>
 public class StartScreen : MonoBehaviour
 {
 	[SerializeField] private InputActionReference _triggerLeftController;
@@ -12,13 +15,18 @@ public class StartScreen : MonoBehaviour
 	[SerializeField] private Sprite _leftTriggerPressed;
 	[SerializeField] private Sprite _rightTriggerPressed;
 
+	/// <summary>
+	/// Called when the component is enabled. Activates the tracking of the actions.
+	/// </summary>
 	private void OnEnable()
 	{
 		_triggerLeftController.action.Enable();
 		_triggerRightController.action.Enable();
 	}
 
-
+	/// <summary>
+	/// Called every frame. Checks if one of the trigger was pressed or not.
+	/// </summary>
 	private void Update()
 	{
 		if (_triggerLeftController.action.triggered)
@@ -26,7 +34,6 @@ public class StartScreen : MonoBehaviour
 			_leftTrigger.sprite = _leftTriggerPressed;
 			LoadMenu();
 		}
-
 		if (_triggerRightController.action.triggered)
 		{
 			_rightTrigger.sprite = _rightTriggerPressed;
@@ -34,5 +41,8 @@ public class StartScreen : MonoBehaviour
 		}
 	}
 
-	private void LoadMenu() => SceneManager.LoadScene("MainMenu");
+	/// <summary>
+	/// Loads the main menu scene.
+	/// </summary>
+	private void LoadMenu() => SceneManager.LoadScene(1);
 }

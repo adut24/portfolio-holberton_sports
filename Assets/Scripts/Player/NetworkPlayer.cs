@@ -44,7 +44,7 @@ public class NetworkPlayer : MonoBehaviourPun
 	[SerializeField] private Animator _rightHandAnim;
 
 	/// <summary>
-	/// 
+	/// Updates the position and rotation of the avatar based on the player's actions.
 	/// </summary>
 	private void Update()
 	{
@@ -69,9 +69,9 @@ public class NetworkPlayer : MonoBehaviourPun
 	}
 
 	/// <summary>
-	/// 
+	/// Maps the position and rotation of the target transform to match the given rig transform.
 	/// </summary>
-	/// <param name="target"></param>
-	/// <param name="rigTransform"></param>
+	/// <param name="target">The target transform to be updated.</param>
+	/// <param name="rigTransform">The source rig transform.</param>
 	private void MapPosition(Transform target, Transform rigTransform) => target.SetPositionAndRotation(rigTransform.position, rigTransform.rotation);
 }

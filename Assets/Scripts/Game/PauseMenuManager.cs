@@ -100,7 +100,7 @@ public class PauseMenuManager : MonoBehaviour
 		{
 			_isPaused = true;
 			PauseMenu.SetActive(true);
-			InteractorManager.ToggleMenuBehavior();
+			InteractorManager.ToggleBehavior();
 			if (PhotonNetwork.OfflineMode)
 				Time.timeScale = 0f;
 		}
@@ -108,7 +108,7 @@ public class PauseMenuManager : MonoBehaviour
 		{
 			_isPaused = false;
 			HideMenu();
-			InteractorManager.ToggleMenuBehavior(GameManager.Instance.AccessibilityManager.ReducedMobilityMode);
+			InteractorManager.ToggleBehavior(GameManager.Instance.AccessibilityManager.ReducedMobilityMode);
 			if (PhotonNetwork.OfflineMode)
 				Time.timeScale = 1f;
 		}
