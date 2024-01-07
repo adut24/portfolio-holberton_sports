@@ -15,7 +15,25 @@ The purpose of this game is to be a pleasant way for people to discover VR and i
 Coming soon.
 
 ## Installation
-Coming soon
+### Meta headsets
+1. Ensure the account in your headset has the "developer mode" enabled: https://developer.oculus.com/documentation/native/android/mobile-device-setup/
+1. Allow content from unknown sources: https://www.meta.com/fr-fr/help/quest/articles/headsets-and-accessories/oculus-rift-s/unknown-sources/
+1. Download and install the Meta Quest Developer Hub (or any sideloader): https://developer.oculus.com/documentation/unity/ts-odh/
+1. Connect your headset to the computer and allow the connection in the headset.
+1. Download the APK version in the [download section](#download).
+1. Start the Meta Quest Developer Hub.
+1. Go in "Device Manager".
+1. Drag and drop the APK file in "Apps", then "Connected Device" or click on "Add Build" and look for the file.
+1. Once the app is installed, click on the three dots at the end of the line of the software and then "Launch App" to start the app in the headset.
+1. You can also start it directly in your headset by going in "Library", clicking on "All" at the top and then "Unknown sources".
+1. Click on "Holberton Sports" to launch it.
+
+### PCVR
+1. If not already downloaded, dowload the software to link your headset to your computer. For Meta headsets: https://www.oculus.com/download_app/?id=1582076955407037
+1. Download the PCVR build in the [download section](#download).
+1. Extract the build from the archive.
+1. Start the software making the link between the computer and the headset.
+1. Run the "Holberton Sports.exe" file.
 
 ## Credits
 ### Menu
