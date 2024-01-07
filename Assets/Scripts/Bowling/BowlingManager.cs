@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>
 /// Responsible for managing all the aspects during a bowling game, in solo or 2 players.
 /// </summary>
-public class BowlingManager : MonoBehaviourPun
+public class BowlingManager : MonoBehaviourPun, IPunObservable
 {
 	/// <summary>
 	/// Gets or sets the pins with their position and rotation to reset them.
@@ -40,6 +40,8 @@ public class BowlingManager : MonoBehaviourPun
 	/// </summary>
 	public GameObject ReplayMenu { get; set; }
 
+	public string OpponentID { get; set; }
+
 	private Transform _ballSpawnPoint;
 	private Transform _pinsSpawnPoint;
 	private int[] _frameScores;
@@ -48,12 +50,14 @@ public class BowlingManager : MonoBehaviourPun
 	private int _throw = 1;
 	private int _remainingPins = 10;
 	private int _score;
+	private int _otherPlayerScore;
 	private bool _isPlayerOne;
 	private bool _canThrowLast;
 	private bool _pinsChecked;
+	private bool _playerOneFinished;
+	private bool _playerTwoFinished;
 	private ScoreWriter _scoreBoard;
 	private GameObject _pins;
-	private DataManager _dataManager;
 
 	/// <summary>
 	/// Initializes the game fields and sets up initial configurations when the game starts.
@@ -63,7 +67,6 @@ public class BowlingManager : MonoBehaviourPun
 		_frameScores = new int[21];
 		Pins = new();
 		_isPlayerOne = PhotonNetwork.LocalPlayer.ActorNumber == 1;
-		_dataManager = GameManager.Instance.DataManager;
 
 		GameObject scoreBoard = _isPlayerOne ? GameObject.Find("Screen Player 1") : GameObject.Find("Screen Player 2");
 		_scoreBoard = scoreBoard.GetComponent<ScoreWriter>();
@@ -79,7 +82,7 @@ public class BowlingManager : MonoBehaviourPun
 			Pins.Add(pin.gameObject, (pin.position, pin.rotation));
 			pin.GetComponent<Pin>().enabled = true;
 		}
-		if (PhotonNetwork.OfflineMode)
+		if (PhotonNetwork.OfflineMode || !_isPlayerOne)
 			SetBall();
 	}
 
@@ -90,6 +93,8 @@ public class BowlingManager : MonoBehaviourPun
 	{
 		if (BallDestroyed)
 			StartCoroutine(ManageRound());
+		if (!PhotonNetwork.OfflineMode && _playerOneFinished && _playerTwoFinished)
+			DisplayReplayMenuForBoth(GameObject.FindWithTag("Player").GetComponent<InteractorManager>(), GameManager.Instance.DataManager);
 	}
 
 	/// <summary>
@@ -134,6 +139,7 @@ public class BowlingManager : MonoBehaviourPun
 		else
 			ManagePins();
 
+		//UpdateData(_playerOneFinished, _playerTwoFinished, _score);
 		ScoreFrame = 0;
 		_pinsChecked = false;
 		FadeScreen.FadeIn();
@@ -258,6 +264,42 @@ public class BowlingManager : MonoBehaviourPun
 			_throw++;
 	}
 
+	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+	{
+		if (stream.IsWriting)
+		{
+			stream.SendNext(_playerOneFinished);
+			stream.SendNext(_playerTwoFinished);
+			stream.SendNext(_score);
+		}
+		else
+		{
+			_playerOneFinished = (bool)stream.ReceiveNext();
+			_playerTwoFinished = (bool)stream.ReceiveNext();
+			_otherPlayerScore = (int)stream.ReceiveNext();
+		}
+	}
+
+/*	private void UpdateData(bool playerOneFinished, bool playerTwoFinished, int score) => photonView.RpcSecure("SendData", RpcTarget.All, true, playerOneFinished, playerTwoFinished, score);
+
+	[PunRPC]
+	private void SendData(bool playerOneFinished, bool playerTwoFinished, int score)
+	{
+		_playerOneFinished = playerOneFinished;
+		_playerTwoFinished = playerTwoFinished;
+		_otherPlayerScore = score;
+	}
+
+
+	[PunRPC]
+	private void ReceiveData(bool playerOneFinished, bool playerTwoFinished, int score)
+	{
+		_playerOneFinished = playerOneFinished;
+		_playerTwoFinished = playerTwoFinished;
+		_otherPlayerScore = score;
+	}*/
+
+
 	/// <summary>
 	/// Puts an end to the game. If in 2-players mode, waits for both player to end their game. Displays the choice to restart a new game
 	/// or return to the main menu.
@@ -270,7 +312,37 @@ public class BowlingManager : MonoBehaviourPun
 			dataManager.HighScores["Bowling"] = _score;
 			dataManager.SaveData();
 		}
+
+		if (PhotonNetwork.OfflineMode)
+		{
+			ReplayMenu.SetActive(true);
+			GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleBehavior();
+		}
+		else
+		{
+			if (_isPlayerOne)
+				_playerOneFinished = true;
+			else
+				_playerTwoFinished = true;
+			ReplayMenu.SetActive(true);
+			GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleBehavior();
+		}
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="interactor"></param>
+	/// <param name="dataManager"></param>
+	private void DisplayReplayMenuForBoth(InteractorManager interactor, DataManager dataManager)
+	{
+		(int, int) result = dataManager.MatchHistory[OpponentID];
+		if (_score > _otherPlayerScore)
+			result.Item1++;
+		else
+			result.Item2++;
+		dataManager.SaveData();
 		ReplayMenu.SetActive(true);
-		GameObject.FindWithTag("Player").GetComponent<InteractorManager>().ToggleBehavior();
+		interactor.ToggleBehavior();
 	}
 }
