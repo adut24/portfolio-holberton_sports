@@ -230,7 +230,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 	/// <returns>An IEnumerator for yielding in a coroutine context.</returns>
 	public IEnumerator LoadPlayer()
 	{
-		Debug.Log("Actor number : " + PhotonNetwork.LocalPlayer.ActorNumber);
 		_spawnPoint = _isPlayerOne ? GameObject.Find("Spawn Point Player 1").transform : GameObject.Find("Spawn Point Player 2").transform;
 		_player = PhotonNetwork.Instantiate(_playerPrefab.name, _spawnPoint.position, _spawnPoint.rotation, 0);
 		GameManager.Instance.Player = _player;

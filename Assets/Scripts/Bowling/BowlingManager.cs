@@ -106,9 +106,9 @@ public class BowlingManager : MonoBehaviourPun, IPunObservable
 		BallDestroyed = false;
 		yield return new WaitForSeconds(2f);
 
-		CheckPins();
+/*		CheckPins();
 		while (!_pinsChecked)
-			yield return null;
+			yield return null;*/
 
 		PauseManager.enabled = false;
 		FadeScreen.FadeOut();
