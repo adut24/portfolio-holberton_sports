@@ -10,8 +10,11 @@ using UnityEngine;
 public class Pin : MonoBehaviourPun
 {
 	[SerializeField] private Rigidbody _rb;
+	[SerializeField] private AudioSource _audioSource;
+	[SerializeField] private AudioClip _pinHit;
 
 	private bool _knocked;
+	private bool _clipPlayed;
 	private BowlingManager _bowlingManager;
 
 	/// <summary>
@@ -34,6 +37,19 @@ public class Pin : MonoBehaviourPun
 			_bowlingManager.ScoreFrame++;
 			_bowlingManager.Pins.Remove(gameObject);
 			StartCoroutine(DelayedDestroy(1.5f));
+		}
+	}
+
+	/// <summary>
+	/// Plays the sound of a pin being hit.
+	/// </summary>
+	/// <param name="collision">informations about the object being hit</param>
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.transform.CompareTag("Pin") || collision.transform.CompareTag("BowlingBall")  && !_clipPlayed)
+		{
+			_audioSource.PlayOneShot(_pinHit);
+			_clipPlayed = true;
 		}
 	}
 
