@@ -12,7 +12,7 @@ Holberton Sports is a Virtual Reality game made on Unity. Taking inspiration fro
 The purpose of this game is to be a pleasant way for people to discover VR and its controls. The sports in this game can be played alone or with another player (who must have their own headset).
 
 ## Download
-Coming soon.
+You can download the Meta Quest build or PCVR build [here](https://github.com/adut24/portfolio-holberton_sports/releases/latest)
 
 ## Installation
 ### Meta headsets
