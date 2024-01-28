@@ -158,7 +158,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         _gameManager.BowlingManager.SetBall();
         _rigTransform.SetPositionAndRotation(_spawnPoint.position, _spawnPoint.rotation);
-        WriteHistoryBetweenPlayers(_gameManager.DataManager.MatchHistory, _multipurposeScreen.transform.Find("HistoryText").GetComponent<TextMeshPro>(), PhotonNetwork.PlayerListOthers[0].UserId);
+        //WriteHistoryBetweenPlayers(_gameManager.DataManager.MatchHistory, _multipurposeScreen.transform.Find("HistoryText").GetComponent<TextMeshPro>(), PhotonNetwork.PlayerListOthers[0].UserId);
     }
 
     /// <summary>
@@ -300,9 +300,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void ConnectToServer()
     {
-        PhotonNetwork.AuthValues = new AuthenticationValues { UserId = GameManager.Instance.DataManager.UserID };
-        //PhotonNetwork.AuthValues = new AuthenticationValues { UserId = System.Guid.NewGuid().ToString() };
-        PhotonNetwork.ConnectUsingSettings();
+		PhotonNetwork.AuthValues = new AuthenticationValues { UserId = GameManager.Instance.DataManager.CurrentUser.id };
+		//PhotonNetwork.AuthValues = new AuthenticationValues { UserId = System.Guid.NewGuid().ToString() };
+		PhotonNetwork.ConnectUsingSettings();
     }
 
     /// <summary>
@@ -353,16 +353,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             {
                 _multipurposeScreen.Find("CodeTitle").GetComponent<TextMeshPro>().text = string.Empty;
                 _multipurposeScreen.Find("HistoryTitle").GetComponent<TextMeshPro>().text = "Record:";
-                _multipurposeScreen.Find("HistoryText").GetComponent<TextMeshPro>().text = _gameManager.DataManager.HighScores[Sport].ToString();
+                //_multipurposeScreen.Find("HistoryText").GetComponent<TextMeshPro>().text = _gameManager.DataManager.HighScores[Sport].ToString();
             }
             else
             {
                 _multipurposeScreen.Find("CodeText").GetComponent<TextMeshPro>().text = RoomCode;
-                if (!_isPlayerOne)
-                    WriteHistoryBetweenPlayers(_gameManager.DataManager.MatchHistory, 
-                                               _multipurposeScreen.transform.Find("HistoryText").GetComponent<TextMeshPro>(), 
-                                               PhotonNetwork.PlayerListOthers[0].UserId);
-            }
-        }
+				/*                if (!_isPlayerOne)
+									WriteHistoryBetweenPlayers(_gameManager.DataManager.MatchHistory, 
+															   _multipurposeScreen.transform.Find("HistoryText").GetComponent<TextMeshPro>(), 
+															   PhotonNetwork.PlayerListOthers[0].UserId);*/
+			}
+		}
     }
 }

@@ -306,12 +306,12 @@ public class BowlingManager : MonoBehaviourPun, IPunObservable
     /// </summary>
     private void FinishGame()
     {
-        DataManager dataManager = GameManager.Instance.DataManager;
+/*        DataManager dataManager = GameManager.Instance.DataManager;
         if (_score > dataManager.HighScores["Bowling"])
         {
             dataManager.HighScores["Bowling"] = _score;
             dataManager.SaveData();
-        }
+        }*/
 
         if (PhotonNetwork.OfflineMode)
         {
@@ -336,13 +336,13 @@ public class BowlingManager : MonoBehaviourPun, IPunObservable
     /// <param name="dataManager"></param>
     private void DisplayReplayMenuForBoth(InteractorManager interactor, DataManager dataManager)
     {
-        (int, int) result = dataManager.MatchHistory[OpponentID];
+/*        (int, int) result = dataManager.MatchHistory[OpponentID];
         if (_score > _otherPlayerScore)
             result.Item1++;
         else
             result.Item2++;
         dataManager.SaveData();
         ReplayMenu.SetActive(true);
-        interactor.ToggleBehavior();
+        interactor.ToggleBehavior();*/
     }
 }

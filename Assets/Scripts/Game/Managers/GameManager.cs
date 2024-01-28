@@ -36,11 +36,6 @@ public class GameManager : MonoBehaviour
     public DataManager DataManager { get; set; }
 
     /// <summary>
-    /// Gets and sets the component managing the tutorial when entering a game.
-    /// </summary>
-    public TutorialManager TutorialManager { get; set; }
-
-    /// <summary>
     /// Gets or sets the component managing a bowling game.
     /// </summary>
     public BowlingManager BowlingManager { get; set; }
@@ -76,13 +71,14 @@ public class GameManager : MonoBehaviour
         _version.text = string.Format("version {0}", Application.version);
         PhotonNetwork.GameVersion = Application.version;
 
-        SoundManager = _soundManager;
-        AccessibilityManager = _accessibilityManager;
+        DataManager = _dataManager;
         PauseMenuManager = _pauseMenuManager;
         NetworkManager = _networkManager;
-        DataManager = _dataManager;
-        TutorialManager = _tutorialManager;
         NetworkManager.PauseMenu = PauseMenuManager.PauseMenu;
+        SoundManager = _soundManager;
+        _soundManager.enabled = true;
+        AccessibilityManager = _accessibilityManager;
+        _accessibilityManager.enabled = true;
 
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(PauseMenuManager.PauseMenu);
@@ -99,8 +95,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GenerateRoomCode()
     {
-        /* 167 961 600 000 000 possibilités */
-        const string chars = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
+        const string chars = "ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         char[] stringChars = new char[8];
 
         for (int i = 0; i < stringChars.Length; i++)
